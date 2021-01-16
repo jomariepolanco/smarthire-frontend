@@ -1,17 +1,41 @@
 import React, { Component } from 'react'
 import { Checkbox } from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import { updateTask } from '../../Redux/tasks/actions'
 
-export default class TaskCard extends Component {
+class TaskCard extends Component {
 
-    clickHandler = () => {
-        //update task archived boolean
+    clickHandler = (e) => {
+        const taskId = +e.target.value 
+        let updateObj;
+        if (this.props.task.archived){
+            updateObj = {archived: false}
+        } else {
+            updateObj = {archived: true}
+        }
+        this.props.updateTask(taskId, updateObj)
     }
 
     render() {
+        console.log(this.props.task)
         return (
             <div>
-                <Checkbox onClick={this.clickHandler} checked={this.props.task.archived} label={this.props.task.content}/>
+                <Checkbox onClick={this.clickHandler} checked={this.props.task.archived} value={this.props.task.id}label={this.props.task.content}/>
             </div>
         )
     }
 }
+
+const msp = (state) => {
+    return {
+        tasks: state.tasks
+    }
+}
+
+const mdp = (dispatch) => {
+    return {
+        updateTask: (taskId, updateObj) => dispatch(updateTask(taskId, updateObj))
+    }
+}
+
+export default connect(msp, mdp)(TaskCard);
