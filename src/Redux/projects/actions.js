@@ -5,7 +5,7 @@ export function getProjects(userId){
         fetch('http://localhost:3000/api/v1/projects')
         .then(r => r.json())
         .then(projects => {
-            let userProjects = projects.filter(project => project.user_id === userId)
+            let userProjects = projects.filter(project => project.userId === userId)
             dispatch({type: GET_USER_PROJECTS, payload: userProjects})
         })
     }

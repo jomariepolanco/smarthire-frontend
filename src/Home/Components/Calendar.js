@@ -5,20 +5,27 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { getProjects } from '../../Redux/projects/actions'
 
 class Calendar extends Component {
+
+    componentDidMount(){
+        //userId should be taken from login when auth implemented
+        this.props.getProjects(2)
+    }
 
     eventClickHandler = (info) => {
         this.props.history.push(`/home/projects/${info.dateStr}`)
     }
 
     render() {
+        console.log(this.props.projects)
         return (
             <>
             <Switch>
                 <Route path='/home/projects/:date' render={({match}) => {
                     let projectDate = match.params.date
-                    let projects = this.props.projects.filter(project => project.date === projectDate)
+                    let projects = [...this.props.projects].filter(project => project.date === projectDate)
                    return <ProjectsContainer projects={projects} />
                 }
                 } />
@@ -42,10 +49,10 @@ const msp = (state) => {
     }
 }
 
-// const mdp = (dispatch) => {
-//     return {
-//         getProjects: (id) => dispatch()
-//     }
-// }
+const mdp = (dispatch) => {
+    return {
+        getProjects: (userId) => dispatch(getProjects(userId))
+    }
+}
 
-export default connect(msp)(Calendar);
+export default connect(msp, mdp)(Calendar);
