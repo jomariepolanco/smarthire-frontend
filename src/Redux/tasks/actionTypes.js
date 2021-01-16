@@ -1,1 +1,1 @@
-export const
+export const GET_PROJECT_TASKS = 'GET_PROJECT_TASKS'
