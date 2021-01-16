@@ -7,9 +7,15 @@ import {getProjectsTasks} from '../../Redux/tasks/actions'
 class ProjectsContainer extends Component {
 
     componentDidMount(){
-        const projectOneId = [...this.props.projects][0].id
-        const projectTwoId = [...this.props.projects][1].id
-        this.props.getProjectsTasks(projectOneId, projectTwoId)
+        const candidate = [...this.props.projects].find(pro => pro.title === "Candidate")
+
+        const client = [...this.props.projects].find(pro => pro.title === "Client")
+
+        const tasks = [...this.props.tasks].filter(task => task.projectId === candidate.id || task.projectId === client.id)
+        if (tasks.length <=0){
+            console.log('here is where you will create tasks based on who has not been called for 60+ days')
+            //create tasks
+        }
     }
 
     renderCandidateProject = () => {
@@ -62,10 +68,4 @@ const msp = (state) => {
     }
 }
 
-const mdp = (dispatch) => {
-    return {
-        getProjectsTasks: (projectOneId, projectTwoId) => dispatch(getProjectsTasks(projectOneId, projectTwoId))
-    }
-}
-
-export default connect(msp, mdp)(ProjectsContainer);
+export default connect(msp)(ProjectsContainer);

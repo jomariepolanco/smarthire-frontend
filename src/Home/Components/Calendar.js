@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {createProject, getProjects} from '../../Redux/projects/actions'
+import { getProjectsTasks } from '../../Redux/tasks/actions'
 
 class Calendar extends Component {
 
@@ -34,11 +35,18 @@ class Calendar extends Component {
         }
     }
 
-    dateClickHandler = async (info) => {
+    dateClickHandler = (info) => {
         const projects = [...this.props.projects].filter(project => project.date === info.dateStr)
-        console.log(projects)
-        if (projects.length <=0){
-            alert("You can't look that far ahead!")
+
+        //get tasks for above projects
+        const projectOneId = [...this.props.projects][0].id
+        const projectTwoId = [...this.props.projects][1].id
+        this.props.getProjectsTasks(projectOneId, projectTwoId)
+        
+        if (projects.length <=0 && info.date < new Date()){
+            alert("This date already passed")
+        } else if (projects.length <=0 && info.date > new Date()) {
+            alert("You're looking too far ahead!")
         } else {
             this.props.history.push(`/home/projects/${info.dateStr}`)
         }
@@ -79,7 +87,8 @@ const msp = (state) => {
 const mdp = (dispatch) => {
     return {
         getProjects: (userId) => dispatch(getProjects(userId)),
-        createProject: (object) => dispatch(createProject(object))
+        createProject: (object) => dispatch(createProject(object)),
+        getProjectsTasks: (projectOneId, projectTwoId) => dispatch(getProjectsTasks(projectOneId, projectTwoId))
     }
 }
 
