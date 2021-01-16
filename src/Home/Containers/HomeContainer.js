@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getProjects } from '../../Redux/projects/actions'
 import Calendar from '../Components/Calendar'
 
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
+
+    componentDidMount(){
+        //userId should be taken from login when auth implemented
+        this.props.getProjects(2)
+    }
+
     render() {
         return (
             <div>
@@ -10,3 +18,11 @@ export default class HomeContainer extends Component {
         )
     }
 }
+
+const mdp = (dispatch) => {
+    return {
+        getProjects: (userId) => dispatch(getProjects(userId))
+    }
+}
+
+export default connect(null, mdp)(HomeContainer);
