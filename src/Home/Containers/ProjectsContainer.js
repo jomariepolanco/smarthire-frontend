@@ -18,7 +18,7 @@ class ProjectsContainer extends Component {
         return(
             <>
             <h1>{candidate.title}</h1>
-            <ProjectCard tasks={candidateTasks}/>
+            <ProjectCard project={candidate} tasks={candidateTasks}/>
             </>
         )
     }
@@ -29,7 +29,7 @@ class ProjectsContainer extends Component {
         return(
             <>
             <h1>{client.title}</h1>
-            <ProjectCard tasks={clientTasks}/>
+            <ProjectCard project={client} tasks={clientTasks}/>
             </>
         )
     }
