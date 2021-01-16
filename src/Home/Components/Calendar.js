@@ -19,7 +19,6 @@ class Calendar extends Component {
     }
 
     render() {
-        console.log(this.props.projects)
         return (
             <>
             <Switch>
