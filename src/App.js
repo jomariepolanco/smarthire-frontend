@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route path='/home' component={HomeContainer} />
+        <Route path='/home' render={(routerProps) => <HomeContainer routerProps={routerProps}/>} />
       </Switch>
       
     </div>

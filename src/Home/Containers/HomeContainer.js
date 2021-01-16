@@ -5,8 +5,7 @@ export default class HomeContainer extends Component {
     render() {
         return (
             <div>
-                home container
-                <Calendar />
+                <Calendar history={this.props.routerProps.history} />
             </div>
         )
     }
