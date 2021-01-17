@@ -5,6 +5,7 @@ import {getCompanies, updateCompany} from '../../Redux/companies/actions'
 import ClientList from '../Components/ClientList';
 import { Route, Switch } from 'react-router-dom';
 import CompanyCard from '../Components/CompanyCard';
+import CreateClientForm from '../Components/CreateClientForm';
 
 class ClientContainer extends Component {
 
@@ -39,6 +40,7 @@ class ClientContainer extends Component {
                             <div>
                                 <SearchForm submitHandler={this.searchFormSubmit}/>
                                 <ClientList clients={this.state.searchedCompanies} />
+                                <CreateClientForm />
                             </div>
 
                         )
