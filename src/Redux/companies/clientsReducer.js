@@ -1,4 +1,4 @@
-import { CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes";
+import { CREATE_NEW_CALL_FOR_COMPANY, CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes";
 
 const defaultState = {
     companies: []
@@ -15,6 +15,11 @@ export function companiesReducer(state = defaultState.companies, action){
             return updatedState
         case CREATE_NEW_COMPANY:
             return [...state, action.payload]
+        case CREATE_NEW_CALL_FOR_COMPANY:
+            let newState = [...state]
+            let index = newState.findIndex(co => co.id === action.payload.companyId)
+            newState[index].calls.push(action.payload)
+            return newState
         default:
             return state
     }

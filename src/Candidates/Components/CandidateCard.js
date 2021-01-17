@@ -49,7 +49,7 @@ class CandidateCard extends Component {
                     <Form value={this.state.zipcode} name="zipcode" changeHandler={this.changeHandler} placeholder="Zipcode" submitHandler={this.submitHandler}/>
 
 
-                <CallContainer candidate={this.props.candidate} calls={this.props.candidate.calls}/>
+                <CallContainer target={this.props.candidate} calls={this.props.candidate.calls}/>
 
                 <NotesCard candidate={this.props.candidate} notes={this.props.candidate.notes}/>
             </div>

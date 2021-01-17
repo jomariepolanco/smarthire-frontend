@@ -1,4 +1,4 @@
-import { CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes"
+import { CREATE_NEW_CALL_FOR_COMPANY, CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes"
 
 export function getCompanies(){
     return function(dispatch){
@@ -33,5 +33,19 @@ export function createCompany(newCompanyObj){
         })
         .then(r => r.json())
         .then(newCo => dispatch({type: CREATE_NEW_COMPANY, payload: newCo}))
+    }
+}
+
+export function createNewCall(newCallObj){
+    return function(dispatch){
+        fetch('http://localhost:3000/api/v1/client_calls', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newCallObj)
+        })
+        .then(r => r.json())
+        .then(newCall => dispatch({type: CREATE_NEW_CALL_FOR_COMPANY, payload: newCall}))
     }
 }

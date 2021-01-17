@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createCandidateCall } from '../../Redux/candidates/actions'
 
 class CreateCallForm extends Component {
 
     state = {
         date: '',
-        time: '', 
-        notes: ''
+        notes: '',
+        time: ''
     }
 
     changeHandler = (e) => {
@@ -16,16 +15,13 @@ class CreateCallForm extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        //change user_id once auth is implemented
-        const newCallObj = {
-            date: this.state.date, 
-            time: this.state.time, 
+        const newCall = {
+            date: this.state.date,
+            time: this.state.time,
             notes: this.state.notes,
             user_id: 2,
-            candidate_id: this.props.target.id
+            company_id: this.props.company.id 
         }
-
-        this.props.createCandidateCall(newCallObj)
     }
 
     render() {
@@ -37,7 +33,7 @@ class CreateCallForm extends Component {
                     <input type="time" name="time" value={this.state.time} onChange={this.changeHandler} />
                     <input type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/>
                     <input type="text" name="user_id" placeholder="Lemuel Witting" disabled />
-                    <input type="text" placeholder={this.props.target.firstName + ' ' + this.props.target.lastName} disabled />
+                    <input type="text" placeholder={this.props.company.name} disabled />
                     <button>Log</button>
                 </form>
             </div>
@@ -47,7 +43,7 @@ class CreateCallForm extends Component {
 
 const mdp = (dispatch) => {
     return {
-        createCandidateCall: (newCallObj) => dispatch(createCandidateCall(newCallObj))
+
     }
 }
 

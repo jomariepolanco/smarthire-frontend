@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CallContainer from '../Containers/CallContainer'
 import Form from '../../sharedComponents/Form'
 import NotesCard from './NotesCard'
 
@@ -32,6 +33,8 @@ export default class CompanyCard extends Component {
                 <Form value={this.state.poc_name} name="poc_name" changeHandler={this.changeHandler} placeholder="Point of Contact Name" submitHandler={this.submitHandler}/>
                 <Form value={this.state.poc_email} name="poc_email" changeHandler={this.changeHandler} placeholder="Point of Contact Email" submitHandler={this.submitHandler}/>
                 <Form value={this.state.poc_number} name="poc_number" changeHandler={this.changeHandler} placeholder="Point of Contact Phone Number" submitHandler={this.submitHandler}/>
+
+                <CallContainer company={this.props.company} calls={this.props.company.calls}/>
 
                 <NotesCard company={this.props.company} notes={this.props.company.notes} />
             </div>

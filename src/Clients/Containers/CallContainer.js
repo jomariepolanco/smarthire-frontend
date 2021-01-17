@@ -12,7 +12,7 @@ export default class CallContainer extends Component {
             <div>
                 <h3>Calls</h3>
                 {this.renderCallCards()}
-                <CreateCallForm target={this.props.target}/>
+                <CreateCallForm company={this.props.company} />
             </div>
         )
     }
