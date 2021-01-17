@@ -21,8 +21,7 @@ export default class CandidateCard extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        debugger
-        console.log(this.state)
+        console.log({[e.target.name]: e.target.value})
     }
 
     render() {
