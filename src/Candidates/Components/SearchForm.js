@@ -1,11 +1,27 @@
 import React, { Component } from 'react'
 
 export default class SearchForm extends Component {
+    state = {
+        name: ''
+    }
+
+    changeHandler = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    submitHandler = (e) => {
+        e.preventDefault()
+        this.props.submitHandler(this.state.name)
+    }
+
     render() {
+        
         return (
             <div>
-                Search Form 
-                
+                <form onSubmit={this.submitHandler}>
+                    <input type="text" name="name" placeholder="Search candidate name" value={this.state.name} onChange={this.changeHandler} />
+                    <button>Submit</button>
+                </form>
             </div>
         )
     }
