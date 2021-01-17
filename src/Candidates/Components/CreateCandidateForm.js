@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createNewCandidate } from '../../Redux/candidates/actions'
 
-export default class CreateCandidateForm extends Component {
+class CreateCandidateForm extends Component {
 
     state = {
         first_name:'',
@@ -20,7 +22,7 @@ export default class CreateCandidateForm extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        
+        this.props.createNewCandidate(this.state)
     }
 
     render() {
@@ -42,3 +44,11 @@ export default class CreateCandidateForm extends Component {
         )
     }
 }
+
+const mdp = (dispatch) => {
+    return {
+        createNewCandidate: (candyObj) => dispatch(createNewCandidate(candyObj))
+    }
+}
+
+export default connect(null, mdp)(CreateCandidateForm);
