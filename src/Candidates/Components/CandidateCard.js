@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Form from '../../components/Form'
+import Form from '../../sharedComponents/Form'
 import CallContainer from '../Containers/CallContainer'
 
 

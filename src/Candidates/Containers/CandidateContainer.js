@@ -5,7 +5,7 @@ import { getCandidates, updateCandidate } from '../../Redux/candidates/actions'
 import CandidateCard from '../Components/CandidateCard'
 import CandidateList from '../Components/CandidateList'
 import CreateCandidateForm from '../Components/CreateCandidateForm'
-import SearchForm from '../Components/SearchForm'
+import SearchForm from '../../sharedComponents/SearchForm'
 
 class CandidateContainer extends Component {
 
@@ -41,7 +41,7 @@ class CandidateContainer extends Component {
                 <Route path='/candidates' render={() => {
                     return (
                         <div>
-                            <SearchForm candidates={this.props.candidates} submitHandler={this.searchFormSubmit}/>
+                            <SearchForm  submitHandler={this.searchFormSubmit}/>
                             <CandidateList candidates={this.state.searchedCandies} />
                             <CreateCandidateForm />
                         </div>
