@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Form from '../../sharedComponents/Form'
 import CallContainer from '../Containers/CallContainer'
+import NotesCard from './NotesCard'
 
 
 class CandidateCard extends Component {
@@ -50,7 +51,7 @@ class CandidateCard extends Component {
 
                 <CallContainer candidate={this.props.candidate} calls={this.props.candidate.calls}/>
 
-                {/* NOTES CONTAINER */}
+                <NotesCard candidate={this.props.candidate} notes={this.props.candidate.notes}/>
             </div>
         )
     }
