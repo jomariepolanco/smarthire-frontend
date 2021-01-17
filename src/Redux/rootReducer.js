@@ -1,5 +1,4 @@
 import {combineReducers} from 'redux'
-import { callsReducer } from './calls/callsReducer'
 import { candidatesReducer } from './candidates/candidatesReducer'
 import { projectsReducer } from './projects/projectsReducer'
 import { tasksReducer } from './tasks/tasksReducer'
