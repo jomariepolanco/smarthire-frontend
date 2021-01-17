@@ -23,6 +23,7 @@ class CreateCandidateForm extends Component {
     submitHandler = (e) => {
         e.preventDefault()
         this.props.createNewCandidate(this.state)
+        //push to candidates show page when hit submit
     }
 
     render() {
