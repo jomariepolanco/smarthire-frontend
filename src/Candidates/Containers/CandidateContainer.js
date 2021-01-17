@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import { getCandidates } from '../../Redux/candidates/actions'
+import { getCandidates, updateCandidate } from '../../Redux/candidates/actions'
 import CandidateCard from '../Components/CandidateCard'
 import CandidateList from '../Components/CandidateList'
 import SearchForm from '../Components/SearchForm'
@@ -21,15 +21,20 @@ class CandidateContainer extends Component {
         this.setState({searchedCandies: searchedCandies})
     }
 
+    updateCandidateHandler = (candyId, updateObj) => {
+        this.props.updateCandidate(candyId, updateObj)
+    }
+
 
     render() {
+        console.log(this.props.candidates)
         return (
             <Switch>
                 <Route path='/candidates/:id' render={({match}) => {
                     let id = +match.params.id 
 
                     let candidate = [...this.props.candidates].find(candy => candy.id === id)
-                    return <CandidateCard candidate={candidate} />
+                    return <CandidateCard candidate={candidate} updateCandidate={this.updateCandidateHandler} />
                 }} />
 
                 <Route path='/candidates' render={() => {
@@ -54,7 +59,8 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
     return {
-        getCandidates: () => dispatch(getCandidates())
+        getCandidates: () => dispatch(getCandidates()),
+        updateCandidate: (candidateId, updateObj) => dispatch(updateCandidate(candidateId, updateObj))
     }
 }
 

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import Form from '../../components/Form'
 
-export default class CandidateCard extends Component {
+
+class CandidateCard extends Component {
 
     state = {
-        firstName: this.props.candidate.firstName,
-        lastName: this.props.candidate.lastName, 
-        cellPhone: this.props.candidate.cellPhone,
-        homePhone: this.props.candidate.homePhone,
-        dateOfBirth: this.props.candidate.dateOfBirth,
+        first_name: this.props.candidate.firstName,
+        last_name: this.props.candidate.lastName, 
+        cell_phone: this.props.candidate.cellPhone,
+        home_phone: this.props.candidate.homePhone,
+        date_of_birth: this.props.candidate.dateOfBirth,
         address: this.props.candidate.address,
         city: this.props.candidate.city,
         state: this.props.candidate.state,
@@ -19,25 +20,24 @@ export default class CandidateCard extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    submitHandler = (e) => {
-        e.preventDefault()
-        console.log({[e.target.name]: e.target.value})
+    submitHandler = (updatedObj) => {
+        this.props.updateCandidate(this.props.candidate.id, updatedObj)
     }
 
     render() {
-        console.log(this.props.candidate)
+        console.log("state:", this.state, "props:", this.props.candidate)
         return (
             <div>
                 <h1>{this.props.candidate.firstName} {this.props.candidate.lastName}</h1>
-                    <Form value={this.state.firstName} name="firstName" changeHandler={this.changeHandler} placeholder="First Name" submitHandler={this.submitHandler}/>
+                    <Form value={this.state.first_name} name="first_name" changeHandler={this.changeHandler} placeholder="First Name" submitHandler={this.submitHandler}/>
                 
-                    <Form value={this.state.lastName} name="lastName" changeHandler={this.changeHandler} placeholder="Last Name" submitHandler={this.submitHandler} />
+                    <Form value={this.state.last_name} name="last_name" changeHandler={this.changeHandler} placeholder="Last Name" submitHandler={this.submitHandler} />
                 
-                    <Form value={this.state.cellPhone} name="cellPhone"  changeHandler={this.changeHandler} placeholder="Cell Phone" submitHandler={this.submitHandler}/>
+                    <Form value={this.state.cell_phone} name="cell_phone"  changeHandler={this.changeHandler} placeholder="Cell Phone" submitHandler={this.submitHandler}/>
                 
-                    <Form value={this.state.homePhone} name="homePhone" changeHandler={this.changeHandler} placeholder="Home Phone" submitHandler={this.submitHandler}/>
+                    <Form value={this.state.home_phone} name="home_phone" changeHandler={this.changeHandler} placeholder="Home Phone" submitHandler={this.submitHandler}/>
                 
-                    <Form value={this.state.dateOfBirth} name="dateOfBirth" changeHandler={this.changeHandler} placeholder="Date Of Birth" submitHandler={this.submitHandler}/>
+                    <Form value={this.state.date_of_birth} name="date_of_birth" changeHandler={this.changeHandler} placeholder="Date Of Birth" submitHandler={this.submitHandler}/>
                 
                     <Form value={this.state.address} name="address" changeHandler={this.changeHandler} placeholder="Street Address" submitHandler={this.submitHandler}/>
                 
@@ -51,3 +51,6 @@ export default class CandidateCard extends Component {
         )
     }
 }
+
+
+export default CandidateCard;

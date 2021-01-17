@@ -18,6 +18,9 @@ export function updateCandidate(candidateId, updateObj){
             body: JSON.stringify(updateObj)
         })
         .then(r => r.json())
-        .then(updatedCandy => dispatch({type: UPDATE_CANDIDATE, payload: updatedCandy}))
+        .then(updatedCandy => {
+            console.log(updatedCandy)
+            dispatch({type: UPDATE_CANDIDATE, payload: updatedCandy})
+        })
     }
 }
