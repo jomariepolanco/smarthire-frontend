@@ -21,6 +21,10 @@ class ClientContainer extends Component {
         this.setState({searchedCompanies: searchedCompanies})
     }
 
+    updateCompanyHandler = (companyId, updateObj) => {
+        this.props.updateCompany(companyId, updateObj)
+    }
+
     render() {
         return (
                 <Switch>
@@ -29,7 +33,7 @@ class ClientContainer extends Component {
                         let company = [...this.props.companies].find(co => co.id === id)
                         return <CompanyCard company={company}/>
                     }} />
-                    
+
                     <Route path='/clients' render={() => {
                         return (
                             <div>
