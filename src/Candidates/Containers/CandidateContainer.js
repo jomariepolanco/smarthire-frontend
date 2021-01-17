@@ -28,7 +28,6 @@ class CandidateContainer extends Component {
 
 
     render() {
-        console.log(this.props.candidates)
         return (
             <Switch>
                 <Route path='/candidates/:id' render={({match}) => {
