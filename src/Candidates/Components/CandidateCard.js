@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Form from '../../components/Form'
+import CallContainer from '../Containers/CallContainer'
 
 
 class CandidateCard extends Component {
@@ -25,7 +26,6 @@ class CandidateCard extends Component {
     }
 
     render() {
-        console.log("state:", this.state, "props:", this.props.candidate)
         return (
             <div>
                 <h1>{this.props.candidate.firstName} {this.props.candidate.lastName}</h1>
@@ -46,7 +46,9 @@ class CandidateCard extends Component {
                     <Form value={this.state.state} name="state" changeHandler={this.changeHandler} placeholder="State" submitHandler={this.submitHandler}/>
                 
                     <Form value={this.state.zipcode} name="zipcode" changeHandler={this.changeHandler} placeholder="Zipcode" submitHandler={this.submitHandler}/>
-                
+
+
+                <CallContainer candidate={this.props.candidate} calls={this.props.candidate.calls}/>
             </div>
         )
     }
