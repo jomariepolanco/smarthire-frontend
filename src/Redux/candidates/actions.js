@@ -1,4 +1,4 @@
-import { GET_ALL_CANDIDATES, UPDATE_CANDIDATE } from "./actionTypes"
+import { CREATE_NEW_CALL, GET_ALL_CANDIDATES, UPDATE_CANDIDATE } from "./actionTypes"
 
 export function getCandidates(){
     return function(dispatch){
@@ -22,5 +22,19 @@ export function updateCandidate(candidateId, updateObj){
             console.log(updatedCandy)
             dispatch({type: UPDATE_CANDIDATE, payload: updatedCandy})
         })
+    }
+}
+
+export function createCandidateCall(newCallObj){
+    return function(dispatch){
+        fetch('http://localhost:3000/api/v1/candidate_calls', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newCallObj)
+        })
+        .then(r => r.json())
+        .then(newCall => dispatch({type: CREATE_NEW_CALL, payload: newCall}))
     }
 }
