@@ -49,6 +49,8 @@ class CandidateCard extends Component {
 
 
                 <CallContainer candidate={this.props.candidate} calls={this.props.candidate.calls}/>
+
+                {/* NOTES CONTAINER */}
             </div>
         )
     }

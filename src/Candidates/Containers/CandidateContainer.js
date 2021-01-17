@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import { getCandidates, updateCandidate } from '../../Redux/candidates/actions'
 import CandidateCard from '../Components/CandidateCard'
 import CandidateList from '../Components/CandidateList'
+import CreateCandidateForm from '../Components/CreateCandidateForm'
 import SearchForm from '../Components/SearchForm'
 
 class CandidateContainer extends Component {
@@ -42,6 +43,7 @@ class CandidateContainer extends Component {
                         <div>
                             <SearchForm candidates={this.props.candidates} submitHandler={this.searchFormSubmit}/>
                             <CandidateList candidates={this.state.searchedCandies} />
+                            <CreateCandidateForm />
                         </div>
 
                     )
