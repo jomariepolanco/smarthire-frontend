@@ -46,6 +46,8 @@ export function createNewCall(newCallObj){
             body: JSON.stringify(newCallObj)
         })
         .then(r => r.json())
-        .then(newCall => dispatch({type: CREATE_NEW_CALL_FOR_COMPANY, payload: newCall}))
+        .then(newCall => {
+            dispatch({type: CREATE_NEW_CALL_FOR_COMPANY, payload: newCall})
+        })
     }
 }

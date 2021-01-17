@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { createNewCall } from '../../Redux/companies/actions'
 
 class CreateCallForm extends Component {
 
@@ -22,6 +23,8 @@ class CreateCallForm extends Component {
             user_id: 2,
             company_id: this.props.company.id 
         }
+
+        this.props.createNewCall(newCall)
     }
 
     render() {
@@ -43,7 +46,7 @@ class CreateCallForm extends Component {
 
 const mdp = (dispatch) => {
     return {
-
+        createNewCall: (newObj) => dispatch(createNewCall(newObj))
     }
 }
 
