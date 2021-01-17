@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import SearchForm from '../../sharedComponents/SearchForm'
-import {getCompanies} from '../../Redux/companies/actions'
+import {getCompanies, updateCompany} from '../../Redux/companies/actions'
 import ClientList from '../Components/ClientList';
 import { Route, Switch } from 'react-router-dom';
 import CompanyCard from '../Components/CompanyCard';
@@ -31,14 +31,14 @@ class ClientContainer extends Component {
                     <Route path='/clients/:id' render={({match}) => {
                         let id = +match.params.id 
                         let company = [...this.props.companies].find(co => co.id === id)
-                        return <CompanyCard company={company}/>
+                        return <CompanyCard company={company} updateCompany={this.updateCompanyHandler}/>
                     }} />
 
                     <Route path='/clients' render={() => {
                         return (
                             <div>
                                 <SearchForm submitHandler={this.searchFormSubmit}/>
-                                <ClientList clients={this.state.searchedCompanies}/>
+                                <ClientList clients={this.state.searchedCompanies} />
                             </div>
 
                         )
@@ -56,7 +56,8 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
     return {
-        getCompanies: () => dispatch(getCompanies())
+        getCompanies: () => dispatch(getCompanies()),
+        updateCompany: (coId, updateObj) => dispatch(updateCompany(coId, updateObj))
     }
 }
 export default connect(msp, mdp)(ClientContainer);

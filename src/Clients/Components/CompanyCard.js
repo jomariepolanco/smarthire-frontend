@@ -18,7 +18,7 @@ export default class CompanyCard extends Component {
     }
 
     submitHandler = (updateObj) => {
-        console.log(updateObj)
+        this.props.updateCompany(this.props.company.id, updateObj)
     }
 
     render() {
