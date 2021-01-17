@@ -19,6 +19,11 @@ export default class Navbar extends Component {
                         Home 
                     </Button>
                 </Menu.Item>
+                <Menu.Item position="left">
+                    <Button as={NavLink} to='/candidates'>
+                        Candidates
+                    </Button>
+                </Menu.Item>
             </Menu>
         )
     }
