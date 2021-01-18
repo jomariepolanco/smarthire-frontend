@@ -35,7 +35,7 @@ class CreateJobForm extends Component {
                     <input type="text" name="description" value={this.state.description} placeholder="Job Description" onChange={this.changeHandler}/>
                     <input type="number" name="pay" value={this.state.pay} placeholder="Pay" onChange={this.changeHandler}/>
                     <input type="text" name="due_date" value={this.state.due_date} placeholder="Due Date" onChange={this.changeHandler}/>
-                    <input type="text" name="user_id" disabled placeholder="Lemuel Witting"/>
+                    <input type="text" name="user_id" disabled placeholder={this.props.user.first_name + ' ' + this.props.user.last_name}/>
                     <input disabled type="text" name="company_id" placeholder={this.props.company.name}/>
                     <button>Create Job</button>
                 </form>

@@ -35,7 +35,7 @@ class CreateCallForm extends Component {
                     <input type="date" name="date" value={this.state.date} onChange={this.changeHandler} />
                     <input type="time" name="time" value={this.state.time} onChange={this.changeHandler} />
                     <input type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/>
-                    <input type="text" name="user_id" placeholder="Lemuel Witting" disabled />
+                    <input type="text" name="user_id" placeholder={this.props.user.first_name + ' ' + this.props.user.last_name} disabled />
                     <input type="text" placeholder={this.props.company.name} disabled />
                     <button>Log</button>
                 </form>
