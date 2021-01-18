@@ -10,6 +10,11 @@ import { getProjectsTasks } from '../../Redux/tasks/actions'
 
 class Calendar extends Component {
 
+    state = {
+        candidateColor: 'orange',
+        clientColor: 'blue'
+    }
+
     componentDidMount(){
         const date = new Date()
         const today = `${date.getFullYear()}-${("0" + date.getMonth() + 1).slice(-2)}-${("0" + date.getDate()).slice(-2)}`
@@ -33,6 +38,21 @@ class Calendar extends Component {
             this.props.createProject(candidateObj)
             this.props.createProject(clientObj)
         }
+
+
+        //color change for calendar
+        for (let pro in projects){
+            if (pro.tasks){
+                [...this.props.projects].forEach(pro => {
+                    if (pro.title === 'Candidate' && pro.tasks.every(task => task.archived)){
+                        this.setState({candidateColor: 'green'})
+                    }
+                    if (pro.title === 'Client' && pro.tasks.every(task => task.archived)){
+                        this.setState({clientColor: 'green'})
+                    }
+                })
+            }
+        }
     }
 
     dateClickHandler = (info) => {
@@ -53,7 +73,6 @@ class Calendar extends Component {
     }
 
     render() {
-        console.log(this.props.projects)
         return (
             <>
             <Switch>
@@ -66,8 +85,8 @@ class Calendar extends Component {
                 <Route path='/home' render={() => {
                     return (
                         <div>
-                            <FullCalendar plugins={[dayGridPlugin, interactionPlugin]}  dateClick={this.dateClickHandler} events={[{daysOfWeek: [1,2,3,4,5], title: 'Candidate Task List', backgroundColor: 'orange'
-                        }, {daysOfWeek: [1,2,3,4,5], title: 'Client Task List'}]}  />
+                            <FullCalendar plugins={[dayGridPlugin, interactionPlugin]}  dateClick={this.dateClickHandler} events={[{daysOfWeek: [1,2,3,4,5], title: 'Candidate Task List', backgroundColor: this.state.candidateColor
+                        }, {daysOfWeek: [1,2,3,4,5], title: 'Client Task List', backgroundColor: this.state.clientColor}]}  />
                         </div>
                     )
                 }} />
