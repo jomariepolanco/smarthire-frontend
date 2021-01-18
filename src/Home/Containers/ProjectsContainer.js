@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ProjectCard from '../Components/ProjectCard'
 import {Grid} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import {getProjectsTasks} from '../../Redux/tasks/actions'
+import {createTask, getProjectsTasks} from '../../Redux/tasks/actions'
 
 class ProjectsContainer extends Component {
 
@@ -19,29 +19,31 @@ class ProjectsContainer extends Component {
           lastCandiesCall.forEach(call => {
               if (((new Date().getTime() - call[0].getTime()) / (1000 * 3600 * 24)) >= 60){
                   //create task
-                  console.log('create task')
+                  const candyTaskObj = {
+                      archived: false,
+                      date: new Date().toDateString(),
+                      project_id: candidate.id,
+                      content: `Call ${this.props.candidates.find(candy => candy.id === call[1]).firstName + ' ' + this.props.candidates.find(candy => candy.id === call[1]).lastName} for 60+ day check`
+                  }
+                  this.props.createTask(candyTaskObj)
               }
           })
-          //find last client call
+            //find last client call
+            let lastClientsCall = [...this.props.companies].map(co => [new Date(Math.max(...co.calls.map(e => new Date(e.date)))), co.id])
+
+            lastClientsCall.forEach(call => {
+                if (((new Date().getTime() - call[0].getTime()) / (1000 * 3600 * 24)) >= 60){
+                    const coTaskObj = {
+                        archived: false,
+                        date: new Date().toDateString(),
+                        project_id: client.id,
+                        content: `Call ${this.props.companies.find(co => co.id === call[1]).name} for 60+ day check`
+                    }
+                    this.props.createTask(coTaskObj)
+                }
+            })
         }
     }
-
-    // find60PlusDayCalls = () => {
-    //     //return calls where more than 60 days have passed
-    //     if (this.props.calls.length > 0){
-    //         // console.log(this.props.calls)
-    //         // debugger
-    //         const calls = [...this.props.calls].filter(call => {
-    //             const callDate = new Date(call.date)
-    //             const today = new Date()
-    //             const timeDifference = today.getTime() - callDate.getTime()
-    //             const dayDifference = timeDifference / (1000 * 3600 * 24)
-    //             return dayDifference >= 60
-    //             // add user_id == logged in user
-    //         } )
-    //         this.createTodosFor60PlusDayCalls(calls)
-    //     }
-    // }
 
     renderCandidateProject = () => {
         const candidate = [...this.props.projects].find(pro => pro.title === "Candidate")
@@ -95,7 +97,7 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
     return {
-
+        createTask: (taskObj) => dispatch(createTask(taskObj))
     }
 }
 

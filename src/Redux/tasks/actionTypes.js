@@ -1,3 +1,5 @@
 export const GET_PROJECT_TASKS = 'GET_PROJECT_TASKS'
 
 export const UPDATE_TASK = 'UPDATE_TASK'
+
+export const CREATE_TASK = 'CREATE_TASK'

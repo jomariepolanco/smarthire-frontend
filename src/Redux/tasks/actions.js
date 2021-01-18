@@ -1,4 +1,4 @@
-import { GET_PROJECT_TASKS, UPDATE_TASK } from "./actionTypes"
+import { CREATE_TASK, GET_PROJECT_TASKS, UPDATE_TASK } from "./actionTypes"
 
 export function getProjectsTasks(projectOneId, projectTwoId){
     return function(dispatch){
@@ -23,5 +23,19 @@ export function updateTask(taskId, updateObj){
         })
         .then(r => r.json())
         .then(updatedTaskObj => dispatch({type: UPDATE_TASK, payload: updatedTaskObj}))
+    }
+}
+
+export function createTask(taskObj){
+    return function(dispatch){
+        fetch('http://localhost:3000/api/v1/tasks', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(taskObj)
+        })
+        .then(r => r.json())
+        .then(newTask => dispatch({type: CREATE_TASK, payload: newTask}))
     }
 }
