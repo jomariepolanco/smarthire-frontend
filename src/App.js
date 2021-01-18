@@ -5,7 +5,6 @@ import './App.css';
 import CandidateContainer from './Candidates/Containers/CandidateContainer';
 import ClientContainer from './Clients/Containers/ClientContainer';
 import HomeContainer from './Home/Containers/HomeContainer';
-import JobsContainer from './Jobs/Containers/JobsContainer';
 import Navbar from './Layout/Navbar';
 
 import Login from './Layout/Login';
@@ -20,18 +19,22 @@ class App extends React.Component{
 
   render(){
     return (
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route path='/login' render={(routerProps) => <Login history={routerProps.history} />} />
-          <Route path='/home' render={(routerProps) => <HomeContainer routerProps={routerProps}/>} />
-  
-          <Route path='/candidates' render={() => <CandidateContainer />} />
-  
-          <Route path='/clients' render={() => <ClientContainer />} />
-        </Switch> 
-        
-      </div>
+      <>
+        <div className="App">
+          <Navbar />
+          <Switch>
+            <Route path='/login' render={(routerProps) => <Login history={routerProps.history} />} />
+
+            <Route path='/home' render={(routerProps) => <HomeContainer routerProps={routerProps} />} />
+    
+            <Route path='/candidates' render={() => <CandidateContainer user={this.props.user}/>} />
+    
+            <Route path='/clients' render={() => <ClientContainer user={this.props.user}/>} />
+
+            <Route path='/' render={() => <h1>HireSmart</h1>} />
+          </Switch> 
+        </div>
+      </>
     );
   }
 

@@ -8,7 +8,6 @@ const defaultState = {
 export function usersReducer(state = defaultState.user, action){
     switch(action.type){
         case LOGIN_SUCCESS:
-            browserHistory.push('/home')
             return action.payload
         case SET_USER:
             return action.payload 

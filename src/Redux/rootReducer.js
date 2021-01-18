@@ -5,6 +5,7 @@ import { companiesReducer } from './companies/clientsReducer'
 import { jobsReducer } from './jobs/jobsReducer'
 import { projectsReducer } from './projects/projectsReducer'
 import { tasksReducer } from './tasks/tasksReducer'
+import { usersReducer } from './users/usersReducer'
 
 export const rootReducer = combineReducers({
     projects: projectsReducer,
@@ -12,5 +13,6 @@ export const rootReducer = combineReducers({
     candidates: candidatesReducer,
     companies: companiesReducer,
     jobs: jobsReducer,
-    applications: applicationsReducer
+    applications: applicationsReducer,
+    user: usersReducer
 })
