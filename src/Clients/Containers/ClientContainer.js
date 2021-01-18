@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SearchForm from '../../sharedComponents/SearchForm'
 import {getCompanies, updateCompany} from '../../Redux/companies/actions'
 import ClientList from '../Components/ClientList';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import CompanyCard from '../Components/CompanyCard';
 import CreateClientForm from '../Components/CreateClientForm';
 import JobCard from '../../Jobs/Components/JobCard';
@@ -32,31 +32,40 @@ class ClientContainer extends Component {
 
     render() {
         return (
-                <Switch>
+            <>
+            {this.props.user ?
+            
+            <Switch>
+                <Route path='/clients/:id/jobs/:jobId' render={({match}) => {
+                    let id = +match.params.jobId
+                    let job = [...this.props.jobs].find(job => job.id === id)
+                    return <JobCard job={job} />
+                }} />
 
-                    <Route path='/clients/:id/jobs/:jobId' render={({match}) => {
-                        let id = +match.params.jobId
-                        let job = [...this.props.jobs].find(job => job.id === id)
-                        return <JobCard job={job} />
-                    }} />
+                <Route path='/clients/:id' render={({match}) => {
+                    let id = +match.params.id 
+                    let company = [...this.props.companies].find(co => co.id === id)
+                    return <CompanyCard company={company} updateCompany={this.updateCompanyHandler}/>
+                }} />
 
-                    <Route path='/clients/:id' render={({match}) => {
-                        let id = +match.params.id 
-                        let company = [...this.props.companies].find(co => co.id === id)
-                        return <CompanyCard company={company} updateCompany={this.updateCompanyHandler}/>
-                    }} />
+                <Route path='/clients' render={() => {
+                    return (
+                        <div>
+                            <SearchForm submitHandler={this.searchFormSubmit}/>
+                            <ClientList clients={this.state.searchedCompanies} />
+                            <CreateClientForm />
+                        </div>
 
-                    <Route path='/clients' render={() => {
-                        return (
-                            <div>
-                                <SearchForm submitHandler={this.searchFormSubmit}/>
-                                <ClientList clients={this.state.searchedCompanies} />
-                                <CreateClientForm />
-                            </div>
-
-                        )
-                    }} />
-                </Switch>
+                    )
+                }} />
+            </Switch>
+            :
+            
+            <Redirect to='/login' />
+            
+            }
+                
+            </>
         )
     }
 }
@@ -64,7 +73,8 @@ class ClientContainer extends Component {
 const msp = (state) => {
     return {
         companies: state.companies,
-        jobs: state.jobs
+        jobs: state.jobs,
+        user: state.user 
     }
 }
 

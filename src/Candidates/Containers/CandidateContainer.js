@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import { getCandidates, updateCandidate } from '../../Redux/candidates/actions'
 import CandidateCard from '../Components/CandidateCard'
 import CandidateList from '../Components/CandidateList'
@@ -29,32 +29,46 @@ class CandidateContainer extends Component {
 
     render() {
         return (
-            <Switch>
-                <Route path='/candidates/:id' render={({match}) => {
-                    let id = +match.params.id 
+            <>
+            {this.props.user ?
+                <Switch>
+                    <Route path='/candidates/:id' render={({match}) => {
+                        let id = +match.params.id 
 
-                    let candidate = [...this.props.candidates].find(candy => candy.id === id)
-                    return <CandidateCard candidate={candidate} updateCandidate={this.updateCandidateHandler} />
-                }} />
+                        let candidate = [...this.props.candidates].find(candy => candy.id === id)
+                        return <CandidateCard candidate={candidate} updateCandidate={this.updateCandidateHandler} />
+                    }} />
 
-                <Route path='/candidates' render={() => {
-                    return (
-                        <div>
-                            <SearchForm  submitHandler={this.searchFormSubmit}/>
-                            <CandidateList candidates={this.state.searchedCandies} />
-                            <CreateCandidateForm />
-                        </div>
+                    <Route path='/candidates' render={() => {
+                        return (
+                            <div>
+                                <SearchForm  submitHandler={this.searchFormSubmit}/>
+                                <CandidateList candidates={this.state.searchedCandies} />
+                                <CreateCandidateForm />
+                            </div>
 
-                    )
-                }} />
+                        )
+                    }} />
             </Switch>
+        
+        
+            :
+            
+            
+            <Redirect to='/login' />
+            
+            
+            
+            }
+            </>
         )
     }
 }
 
 const msp = (state) => {
     return {
-        candidates: state.candidates
+        candidates: state.candidates,
+        user: state.user
     }
 }
 

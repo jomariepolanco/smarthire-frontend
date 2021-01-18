@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, SET_USER } from "./actionTypes"
+import { LOGIN_SUCCESS, SET_USER, SIGNUP_SUCCESS } from "./actionTypes"
 
 export function loginUser(credentials){
     return function(dispatch){
@@ -32,6 +32,24 @@ export function startUserSession(){
         .then(r => r.json())
         .then(user => {
             dispatch({type: SET_USER, payload: user.user})
+        })
+    }
+}
+
+export function signUpUser(userObj){
+    return function(dispatch){
+        fetch('http://localhost:3000/api/v1/users', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accepts: 'application/json'
+            },
+            body: JSON.stringify({user: userObj})
+        })
+        .then(r => r.json())
+        .then(user => {
+            localStorage.setItem('token', user.jwt)
+            dispatch({type: SIGNUP_SUCCESS, payload: user.user})
         })
     }
 }

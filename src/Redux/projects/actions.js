@@ -11,7 +11,6 @@ export function getProjects(userId){
         })
         .then(r => r.json())
         .then(projects => {
-            debugger
             let userProjects = projects.filter(project => project.userId === userId)
             dispatch({type: GET_USER_PROJECTS, payload: userProjects})
         })

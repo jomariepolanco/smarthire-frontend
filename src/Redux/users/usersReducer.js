@@ -1,5 +1,4 @@
-import { LOGIN_SUCCESS, SET_USER } from "./actionTypes";
-import {browserHistory} from 'react-router'
+import { LOGIN_SUCCESS, SET_USER, SIGNUP_SUCCESS } from "./actionTypes";
 
 const defaultState = {
     user: null
@@ -11,6 +10,8 @@ export function usersReducer(state = defaultState.user, action){
             return action.payload
         case SET_USER:
             return action.payload 
+        case SIGNUP_SUCCESS:
+            return action.payload
         default:
             return state
     }
