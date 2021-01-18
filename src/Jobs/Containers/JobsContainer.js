@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import CreateJobForm from '../Components/CreateJobForm'
+import {connect} from 'react-redux'
+import { createJob } from '../../Redux/jobs/actions'
 
 class JobsContainer extends Component {
 
@@ -16,6 +19,10 @@ class JobsContainer extends Component {
     })
     }
 
+    createFormSubmitHandler = (newObj) => {
+        this.props.createJob(newObj)
+    }
+
   
     render() {
         console.log(this.props.jobs)
@@ -23,10 +30,16 @@ class JobsContainer extends Component {
             <div>
                 <h3>Jobs</h3>
                 {this.renderJobsList()}
+                <CreateJobForm submitHandler={this.createFormSubmitHandler} company={this.props.company} />
             </div>
         )
     }
 }
 
+const mdp = (dispatch) => {
+    return {
+        createJob: (newObj) => dispatch(createJob(newObj))
+    }
+}
 
-export default JobsContainer;
+export default connect(null, mdp)(JobsContainer);
