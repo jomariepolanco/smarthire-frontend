@@ -4,6 +4,7 @@ import './App.css';
 import CandidateContainer from './Candidates/Containers/CandidateContainer';
 import ClientContainer from './Clients/Containers/ClientContainer';
 import HomeContainer from './Home/Containers/HomeContainer';
+import JobsContainer from './Jobs/Containers/JobsContainer';
 import Navbar from './Layout/Navbar';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='/candidates' render={() => <CandidateContainer />} />
 
         <Route path='/clients' render={() => <ClientContainer />} />
+        {/* <Route path='/jobs' render={() => <JobsContainer />} /> */}
       </Switch> 
       
     </div>

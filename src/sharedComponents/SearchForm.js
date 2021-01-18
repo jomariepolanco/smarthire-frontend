@@ -15,7 +15,6 @@ export default class SearchForm extends Component {
     }
 
     render() {
-        console.log(this.state.name)
         return (
             <div>
                 <form onSubmit={this.submitHandler}>

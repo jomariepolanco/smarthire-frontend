@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import CallContainer from '../Containers/CallContainer'
 import Form from '../../sharedComponents/Form'
 import NotesCard from './NotesCard'
-import JobsContainer from '../Containers/JobsContainer'
-import { Route } from 'react-router-dom'
-import JobCard from './JobCard'
+import { NavLink } from 'react-router-dom'
+import JobsContainer from '../../Jobs/Containers/JobsContainer'
+
 
 export default class CompanyCard extends Component {
 
@@ -41,13 +41,7 @@ export default class CompanyCard extends Component {
 
                 <NotesCard company={this.props.company} notes={this.props.company.notes} />
 
-                <JobsContainer jobs={this.props.company.jobs}/>
-
-                <Route path='/jobs/:id' render={({match}) => {
-                    let id = +match.params.id 
-                    let job = [...this.props.company.jobs].find(job => job.id === id)
-                    return <JobCard job={job}/>
-                }} />
+                <JobsContainer company={this.props.company} jobs={this.props.company.jobs} />
             </div>
         )
     }

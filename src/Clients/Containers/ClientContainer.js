@@ -6,6 +6,9 @@ import ClientList from '../Components/ClientList';
 import { Route, Switch } from 'react-router-dom';
 import CompanyCard from '../Components/CompanyCard';
 import CreateClientForm from '../Components/CreateClientForm';
+import JobCard from '../../Jobs/Components/JobCard';
+import { getJobs } from '../../Redux/jobs/actions';
+
 
 class ClientContainer extends Component {
 
@@ -15,6 +18,7 @@ class ClientContainer extends Component {
 
     componentDidMount(){
         this.props.getCompanies()
+        this.props.getJobs()
     }
 
     searchFormSubmit = (name) => {
@@ -29,6 +33,13 @@ class ClientContainer extends Component {
     render() {
         return (
                 <Switch>
+
+                        <Route path='/clients/:id/jobs/:jobId' render={({match}) => {
+                        let id = +match.params.jobId
+                        let job = [...this.props.jobs].find(job => job.id === id)
+                        return <JobCard job={job} />
+                    }} />
+
                     <Route path='/clients/:id' render={({match}) => {
                         let id = +match.params.id 
                         let company = [...this.props.companies].find(co => co.id === id)
@@ -52,14 +63,16 @@ class ClientContainer extends Component {
 
 const msp = (state) => {
     return {
-        companies: state.companies
+        companies: state.companies,
+        jobs: state.jobs
     }
 }
 
 const mdp = (dispatch) => {
     return {
         getCompanies: () => dispatch(getCompanies()),
-        updateCompany: (coId, updateObj) => dispatch(updateCompany(coId, updateObj))
+        updateCompany: (coId, updateObj) => dispatch(updateCompany(coId, updateObj)),
+        getJobs: () => dispatch(getJobs())
     }
 }
 export default connect(msp, mdp)(ClientContainer);
