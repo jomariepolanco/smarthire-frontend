@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, SET_USER, SIGNUP_SUCCESS } from "./actionTypes"
+import { LOGIN_SUCCESS, LOGOUT, SET_USER, SIGNUP_SUCCESS } from "./actionTypes"
 
 export function loginUser(credentials){
     return function(dispatch){
@@ -52,4 +52,8 @@ export function signUpUser(userObj){
             dispatch({type: SIGNUP_SUCCESS, payload: user.user})
         })
     }
+}
+
+export function logOutUser(){
+    return {type: LOGOUT}
 }

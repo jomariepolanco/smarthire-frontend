@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Button, Menu } from 'semantic-ui-react'
+import Logout from './Logout'
 
 export default class Navbar extends Component {
 
@@ -27,6 +28,21 @@ export default class Navbar extends Component {
                 <Menu.Item position="left">
                     <Button as={NavLink} to='/clients'>
                         Clients
+                    </Button>
+                </Menu.Item>
+                <Menu.Item position="left">
+                    <Button as={NavLink} to='/login'>
+                        Login
+                    </Button>
+                </Menu.Item>
+                <Menu.Item position="left">
+                    <Button as={NavLink} to='/signup'>
+                        Sign Up
+                    </Button>
+                </Menu.Item>
+                <Menu.Item position="left">
+                    <Button as={Logout}>
+                        Logout
                     </Button>
                 </Menu.Item>
             </Menu>

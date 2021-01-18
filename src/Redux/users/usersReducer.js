@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, SET_USER, SIGNUP_SUCCESS } from "./actionTypes";
+import { LOGIN_SUCCESS, LOGOUT, SET_USER, SIGNUP_SUCCESS } from "./actionTypes";
 
 const defaultState = {
     user: null
@@ -12,6 +12,8 @@ export function usersReducer(state = defaultState.user, action){
             return action.payload 
         case SIGNUP_SUCCESS:
             return action.payload
+        case LOGOUT:
+            return null
         default:
             return state
     }

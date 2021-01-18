@@ -43,12 +43,13 @@ class App extends React.Component{
     
       :
         <>
+        <Navbar />
           <Switch>
                 <Route path='/login' render={(routerProps) => <Login history={routerProps.history} />} />
 
                 <Route path='/signup' render={(routerProps) => <Signup history={routerProps.history} />} />
           </Switch>
-          <Redirect to='/signup' />
+          <Redirect to='/login' />
         </>
       }
       </>
