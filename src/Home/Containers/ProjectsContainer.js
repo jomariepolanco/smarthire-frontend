@@ -12,11 +12,36 @@ class ProjectsContainer extends Component {
         const client = [...this.props.projects].find(pro => pro.title === "Client")
 
         const tasks = [...this.props.tasks].filter(task => task.projectId === candidate.id || task.projectId === client.id)
-        if (tasks.length <=0){
-            console.log('here is where you will create tasks based on who has not been called for 60+ days')
-            //create tasks
+        if (tasks.length <= 0){
+          //find last candidate call
+          let lastCandiesCall = [...this.props.candidates].map(candy => [new Date(Math.max(...candy.calls.map(e => new Date(e.date)))), candy.id])
+            
+          lastCandiesCall.forEach(call => {
+              if (((new Date().getTime() - call[0].getTime()) / (1000 * 3600 * 24)) >= 60){
+                  //create task
+                  console.log('create task')
+              }
+          })
+          //find last client call
         }
     }
+
+    // find60PlusDayCalls = () => {
+    //     //return calls where more than 60 days have passed
+    //     if (this.props.calls.length > 0){
+    //         // console.log(this.props.calls)
+    //         // debugger
+    //         const calls = [...this.props.calls].filter(call => {
+    //             const callDate = new Date(call.date)
+    //             const today = new Date()
+    //             const timeDifference = today.getTime() - callDate.getTime()
+    //             const dayDifference = timeDifference / (1000 * 3600 * 24)
+    //             return dayDifference >= 60
+    //             // add user_id == logged in user
+    //         } )
+    //         this.createTodosFor60PlusDayCalls(calls)
+    //     }
+    // }
 
     renderCandidateProject = () => {
         const candidate = [...this.props.projects].find(pro => pro.title === "Candidate")
@@ -68,4 +93,10 @@ const msp = (state) => {
     }
 }
 
-export default connect(msp)(ProjectsContainer);
+const mdp = (dispatch) => {
+    return {
+
+    }
+}
+
+export default connect(msp, mdp)(ProjectsContainer);

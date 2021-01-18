@@ -60,7 +60,7 @@ class Calendar extends Component {
                 <Route path='/home/projects/:date' render={({match}) => {
                     let projectDate = match.params.date
                     let projects = [...this.props.projects].filter(project => project.date === projectDate)
-                   return <ProjectsContainer projects={projects} />
+                   return <ProjectsContainer candidates={this.props.candidates} companies={this.props.companies} projects={projects} />
                 }
                 } />
                 <Route path='/home' render={() => {
@@ -80,7 +80,9 @@ class Calendar extends Component {
 
 const msp = (state) => {
     return {
-        projects: state.projects
+        projects: state.projects,
+        candidates: state.candidates,
+        companies: state.companies
     }
 }
 
