@@ -1,8 +1,14 @@
 import { CREATE_TASK, GET_PROJECT_TASKS, UPDATE_TASK } from "./actionTypes"
 
 export function getProjectsTasks(projectOneId, projectTwoId){
+    const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/api/v1/tasks')
+        fetch('http://localhost:3000/api/v1/tasks', {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then(r => r.json())
         .then(tasksData => {
             const tasks = tasksData.filter(task => task.projectId === projectOneId || task.projectId === projectTwoId)
@@ -13,11 +19,13 @@ export function getProjectsTasks(projectOneId, projectTwoId){
 }
 
 export function updateTask(taskId, updateObj){
+    const token = localStorage.getItem('token')
     return function(dispatch){
         fetch(`http://localhost:3000/api/v1/tasks/${taskId}`, {
             method: "PATCH",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(updateObj)
         })
@@ -27,11 +35,13 @@ export function updateTask(taskId, updateObj){
 }
 
 export function createTask(taskObj){
+    const token = localStorage.getItem('token')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/tasks', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(taskObj)
         })

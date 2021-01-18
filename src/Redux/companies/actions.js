@@ -1,19 +1,27 @@
 import { CREATE_NEW_CALL_FOR_COMPANY, CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes"
 
 export function getCompanies(){
+    const token = localStorage.getItem('token')
     return function(dispatch){
-        fetch('http://localhost:3000/api/v1/companies')
+        fetch('http://localhost:3000/api/v1/companies', {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then(r => r.json())
         .then(companies => dispatch({type: GET_ALL_COMPANIES, payload: companies}))
     }
 }
 
 export function updateCompany(companyId, updateObj){
+    const token = localStorage.getItem('token')
     return function(dispatch){
         fetch(`http://localhost:3000/api/v1/companies/${companyId}`, {
             method: "PATCH",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(updateObj)
         })
@@ -23,11 +31,13 @@ export function updateCompany(companyId, updateObj){
 }
 
 export function createCompany(newCompanyObj){
+    const token = localStorage.getItem('token')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/companies', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(newCompanyObj)
         })
@@ -37,11 +47,13 @@ export function createCompany(newCompanyObj){
 }
 
 export function createNewCall(newCallObj){
+    const token = localStorage.getItem('token')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/client_calls', {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(newCallObj)
         })
