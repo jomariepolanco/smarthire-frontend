@@ -17,7 +17,6 @@ function App() {
         <Route path='/candidates' render={() => <CandidateContainer />} />
 
         <Route path='/clients' render={() => <ClientContainer />} />
-        {/* <Route path='/jobs' render={() => <JobsContainer />} /> */}
       </Switch> 
       
     </div>

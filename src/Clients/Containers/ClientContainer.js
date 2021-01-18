@@ -34,7 +34,7 @@ class ClientContainer extends Component {
         return (
                 <Switch>
 
-                        <Route path='/clients/:id/jobs/:jobId' render={({match}) => {
+                    <Route path='/clients/:id/jobs/:jobId' render={({match}) => {
                         let id = +match.params.jobId
                         let job = [...this.props.jobs].find(job => job.id === id)
                         return <JobCard job={job} />

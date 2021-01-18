@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ApplicationContainer from '../Containers/ApplicationContainer'
 
 export default class JobCard extends Component {
     render() {
@@ -14,6 +15,7 @@ export default class JobCard extends Component {
                 <p>{job.poc.name}</p>
                 <p>{job.poc.email}</p>
                 <p>{job.poc.phoneNumber}</p>
+                <ApplicationContainer applications={job.jobApplications}/>
             </div>
         )
     }
