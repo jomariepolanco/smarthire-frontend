@@ -26,12 +26,12 @@ class Calendar extends Component {
             //userId changed to logged in user once auth implemented
             const candidateObj = {
                 title: "Candidate",
-                user_id: 2,
+                user_id: this.props.user.id,
                 date: today
             }
             const clientObj = {
                 title: "Client",
-                user_id: 2,
+                user_id: this.props.user.id,
                 date: today
             }
 
@@ -101,7 +101,8 @@ const msp = (state) => {
     return {
         projects: state.projects,
         candidates: state.candidates,
-        companies: state.companies
+        companies: state.companies,
+        user: state.user
     }
 }
 

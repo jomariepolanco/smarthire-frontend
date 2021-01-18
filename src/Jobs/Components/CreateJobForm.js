@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class CreateJobForm extends Component {
+class CreateJobForm extends Component {
 
     state = {
         title: '',
@@ -20,7 +21,7 @@ export default class CreateJobForm extends Component {
             description: this.state.description,
             pay: this.state.pay,
             due_date: this.state.due_date,
-            user_id: 2,
+            user_id: this.props.user.id,
             company_id: this.props.company.id 
         }
         this.props.submitHandler(newJobObj)
@@ -42,3 +43,11 @@ export default class CreateJobForm extends Component {
         )
     }
 }
+
+const msp = (state) => {
+    return {
+        user: state.user 
+    }
+}
+
+export default connect(msp)(CreateJobForm);

@@ -16,12 +16,11 @@ class CreateCallForm extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        //change user_id once auth is implemented
         const newCallObj = {
             date: this.state.date, 
             time: this.state.time, 
             notes: this.state.notes,
-            user_id: 2,
+            user_id: this.props.user.id,
             candidate_id: this.props.target.id
         }
 
@@ -45,12 +44,18 @@ class CreateCallForm extends Component {
     }
 }
 
+const msp = (state) => {
+    return {
+        user: state.user
+    }
+}
+
 const mdp = (dispatch) => {
     return {
         createCandidateCall: (newCallObj) => dispatch(createCandidateCall(newCallObj))
     }
 }
 
-export default connect(null, mdp)(CreateCallForm);
+export default connect(msp, mdp)(CreateCallForm);
 
 //change user value and input to logged in user when auth implemented

@@ -20,7 +20,7 @@ class CreateCallForm extends Component {
             date: this.state.date,
             time: this.state.time,
             notes: this.state.notes,
-            user_id: 2,
+            user_id: this.props.user.id,
             company_id: this.props.company.id 
         }
 
@@ -44,12 +44,18 @@ class CreateCallForm extends Component {
     }
 }
 
+const msp = (state) => {
+    return {
+        user: state.user
+    }
+}
+
 const mdp = (dispatch) => {
     return {
         createNewCall: (newObj) => dispatch(createNewCall(newObj))
     }
 }
 
-export default connect(null, mdp)(CreateCallForm);
+export default connect(msp, mdp)(CreateCallForm);
 
 //change user value and input to logged in user when auth implemented
