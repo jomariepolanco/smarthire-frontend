@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createApplication } from '../../Redux/applications/actions'
 import Form from '../../sharedComponents/Form'
 import CallContainer from '../Containers/CallContainer'
+import CreateApplicationForm from './CreateApplicationForm'
 import NotesCard from './NotesCard'
 
 
@@ -26,6 +29,10 @@ class CandidateCard extends Component {
         this.props.updateCandidate(this.props.candidate.id, updatedObj)
     }
 
+    createAppSubmitHandler = (newAppObj) => {
+        this.props.createApplication(newAppObj)
+    }
+
     render() {
         return (
             <div>
@@ -48,6 +55,7 @@ class CandidateCard extends Component {
                 
                     <Form value={this.state.zipcode} name="zipcode" changeHandler={this.changeHandler} placeholder="Zipcode" submitHandler={this.submitHandler}/>
 
+                <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.createAppSubmitHandler}/>
 
                 <CallContainer target={this.props.candidate} calls={this.props.candidate.calls}/>
 
@@ -57,5 +65,18 @@ class CandidateCard extends Component {
     }
 }
 
+const msp = (state) => {
+    return {
+        jobs: state.jobs
+    }
+}
 
-export default CandidateCard;
+const mdp = (dispatch) => {
+    return {
+        createApplication: (newAppObj) => dispatch(createApplication(newAppObj))
+    }
+}
+
+
+
+export default connect(msp, mdp)(CandidateCard);
