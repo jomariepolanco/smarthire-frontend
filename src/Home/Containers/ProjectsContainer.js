@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ProjectCard from '../Components/ProjectCard'
-import {Grid} from 'semantic-ui-react'
+import {Card, Grid, Item} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {createTask, getProjectsTasks} from '../../Redux/tasks/actions'
 
@@ -49,21 +49,33 @@ class ProjectsContainer extends Component {
         const candidate = [...this.props.projects].find(pro => pro.title === "Candidate")
         const candidateTasks = [...this.props.tasks].filter(task => task.projectId === candidate.id)
         return(
-            <>
-            <h1>{candidate.title}</h1>
-            <ProjectCard project={candidate} tasks={candidateTasks}/>
-            </>
-        )
+            <Card centered fluid>
+                <Item>
+                    <Card.Header as='h1' textAlign='center'>
+                        {candidate.title}
+                    </Card.Header>
+                    <Card.Content>
+                        <ProjectCard project={candidate} tasks={candidateTasks}/>
+                    </Card.Content>
+                </Item>
+            </Card>
+            )
     }
 
     renderClientProject = () => {
         const client = [...this.props.projects].find(pro => pro.title === "Client")
         const clientTasks = [...this.props.tasks].filter(task => task.projectId === client.id)
         return(
-            <>
-            <h1>{client.title}</h1>
-            <ProjectCard project={client} tasks={clientTasks}/>
-            </>
+            <Card centered fluid>
+                <Item>
+                    <Card.Header as='h1' textAlign='center'>
+                        {client.title}
+                    </Card.Header>
+                    <Card.Content>
+                        <ProjectCard project={client} tasks={clientTasks}/>
+                    </Card.Content>
+                </Item>
+            </Card>
         )
     }
     render() {

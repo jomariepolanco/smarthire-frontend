@@ -19,7 +19,7 @@ class TaskCard extends Component {
     render() {
         return (
             <div>
-                <Checkbox onClick={this.clickHandler} checked={this.props.task.archived} value={this.props.task.id}label={this.props.task.content}/>
+                <Checkbox onClick={this.clickHandler} checked={this.props.task.archived} value={this.props.task.id} label={this.props.task.content}/>
             </div>
         )
     }

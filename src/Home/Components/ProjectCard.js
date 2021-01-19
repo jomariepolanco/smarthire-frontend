@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Card } from 'semantic-ui-react'
 import TaskCard from './TaskCard'
 
 export default class ProjectCard extends Component {
@@ -18,10 +19,12 @@ export default class ProjectCard extends Component {
     
     render() {
         return (
-            <div>
-                {this.percentageOfTasksDone()}
-                {this.renderTasks()}
-            </div>
+            <Card.Description>
+                <Card.Header as='h4'>
+                    {this.percentageOfTasksDone()}
+                </Card.Header>
+                    {this.renderTasks()}
+            </Card.Description>
         )
     }
 }
