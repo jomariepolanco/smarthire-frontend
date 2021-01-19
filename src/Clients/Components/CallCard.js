@@ -8,7 +8,7 @@ export default class CallCard extends Component {
                 <h4>{call.date}</h4>
                 <p>{call.notes}</p>
                  {/* backend- send the user name with calls in candidates serializer */}
-                <h5>- {call.user_id}</h5>
+                <h5>- {call.user}</h5>
             </div>
         )
     }

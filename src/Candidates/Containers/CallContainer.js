@@ -8,6 +8,7 @@ export default class CallContainer extends Component {
         return [...this.props.calls].map(call => <CallCard key={call.id} call={call} />)
     }
     render() {
+        console.log(this.props.calls)
         return (
             <div>
                 <h3>Calls</h3>
