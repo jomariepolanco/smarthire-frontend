@@ -48,12 +48,12 @@ class ClientContainer extends Component {
                     return <CompanyCard company={company} updateCompany={this.updateCompanyHandler}/>
                 }} />
 
-                <Route path='/clients' render={() => {
+                <Route path='/clients' render={(routerProps) => {
                     return (
                         <div>
                             <SearchForm submitHandler={this.searchFormSubmit}/>
                             <ClientList clients={this.state.searchedCompanies} />
-                            <CreateClientForm />
+                            <CreateClientForm history={routerProps.history} />
                         </div>
 
                     )

@@ -30,7 +30,7 @@ export function updateCompany(companyId, updateObj){
     }
 }
 
-export function createCompany(newCompanyObj){
+export function createCompany(newCompanyObj, history){
     const token = localStorage.getItem('token')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/companies', {
@@ -42,7 +42,10 @@ export function createCompany(newCompanyObj){
             body: JSON.stringify(newCompanyObj)
         })
         .then(r => r.json())
-        .then(newCo => dispatch({type: CREATE_NEW_COMPANY, payload: newCo}))
+        .then(newCo => {
+            dispatch({type: CREATE_NEW_COMPANY, payload: newCo})
+            history.push(`/clients/${newCo.id}`)
+        })
     }
 }
 

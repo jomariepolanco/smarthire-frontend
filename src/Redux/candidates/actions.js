@@ -32,7 +32,7 @@ export function updateCandidate(candidateId, updateObj){
     }
 }
 
-export function createNewCandidate(candidateObj){
+export function createNewCandidate(candidateObj, history){
     const token = localStorage.getItem('token')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/candidates', {
@@ -44,7 +44,10 @@ export function createNewCandidate(candidateObj){
             body: JSON.stringify(candidateObj)
         })
         .then(r => r.json())
-        .then(newCandy => dispatch({type: CREATE_NEW_CANDIDATE, payload: newCandy}))
+        .then(newCandy => {
+            dispatch({type: CREATE_NEW_CANDIDATE, payload: newCandy})
+            history.push(`/candidates/${newCandy.id}`)
+        })
     }
 }
 

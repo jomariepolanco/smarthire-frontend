@@ -22,7 +22,7 @@ class CreateCandidateForm extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.createNewCandidate(this.state)
+        this.props.createNewCandidate(this.state, this.props.history)
         //push to candidates show page when hit submit
     }
 
@@ -48,7 +48,7 @@ class CreateCandidateForm extends Component {
 
 const mdp = (dispatch) => {
     return {
-        createNewCandidate: (candyObj) => dispatch(createNewCandidate(candyObj))
+        createNewCandidate: (candyObj, history) => dispatch(createNewCandidate(candyObj, history))
     }
 }
 

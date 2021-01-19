@@ -19,8 +19,7 @@ class CreateClientForm extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.createCompany(this.state)
-        //push to client show page when hit submit
+        this.props.createCompany(this.state, this.props.history)
     }
 
     render() {
@@ -42,7 +41,7 @@ class CreateClientForm extends Component {
 
 const mdp = (dispatch) => {
     return {
-        createCompany: (newCoObj) => dispatch(createCompany(newCoObj))
+        createCompany: (newCoObj, history) => dispatch(createCompany(newCoObj, history))
     }
 }
 

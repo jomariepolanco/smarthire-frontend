@@ -41,12 +41,12 @@ class CandidateContainer extends Component {
                         return <CandidateCard candidate={candidate} updateCandidate={this.updateCandidateHandler} />
                     }} />
 
-                    <Route path='/candidates' render={() => {
+                    <Route path='/candidates' render={(routerProps) => {
                         return (
                             <div>
                                 <SearchForm  submitHandler={this.searchFormSubmit}/>
                                 <CandidateList candidates={this.state.searchedCandies} />
-                                <CreateCandidateForm />
+                                <CreateCandidateForm history={routerProps.history} />
                             </div>
 
                         )
