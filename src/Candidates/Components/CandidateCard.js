@@ -61,9 +61,8 @@ class CandidateCard extends Component {
                         
                             <FormInput value={this.state.zipcode} name="zipcode" changeHandler={this.changeHandler} placeholder="Zipcode" submitHandler={this.submitHandler}/>
                         </Segment>
-                        <Segment>
                             <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.createAppSubmitHandler}/>
-
+                        <Segment>
                             <CallContainer target={this.props.candidate} calls={this.props.candidate.calls}/>
                         </Segment>
                     </Grid.Column>

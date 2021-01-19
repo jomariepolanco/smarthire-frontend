@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button, Form, Input, Modal, TextArea } from 'semantic-ui-react'
 import { createCandidateCall } from '../../Redux/candidates/actions'
 
 class CreateCallForm extends Component {
@@ -7,7 +8,8 @@ class CreateCallForm extends Component {
     state = {
         date: '',
         time: '', 
-        notes: ''
+        notes: "Notes on Call",
+        open: false
     }
 
     changeHandler = (e) => {
@@ -28,18 +30,27 @@ class CreateCallForm extends Component {
     }
 
     render() {
-        console.log(this.props.user)
+        console.log(this.state)
         return (
             <div>
-                <button>Log a Call</button>
-                <form onSubmit={this.submitHandler}>
-                    <input type="date" name="date" value={this.state.date} onChange={this.changeHandler} />
-                    <input type="time" name="time" value={this.state.time} onChange={this.changeHandler} />
-                    <input type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/>
-                    <input type="text" name="user_id" placeholder={this.props.user.first_name + ' ' + this.props.user.last_name} disabled />
-                    <input type="text" placeholder={this.props.target.firstName + ' ' + this.props.target.lastName} disabled />
-                    <button>Log</button>
-                </form>
+                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color='green'>Log a Call</Button>}>
+                    <Modal.Content>
+                        <Form onSubmit={this.submitHandler}>
+                            <Form.Field control={Input} label="Date" type="date" name="date" value={this.state.date} onChange={this.changeHandler}/>
+
+                            <Form.Field control={Input} label="Time" type="time" name="time" value={this.state.time} onChange={this.changeHandler} />
+
+                            <Form.TextArea control={TextArea} label="Notes" type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/>
+                            
+                            <Form.Field control={Input} label="Your Name" type="text" name="user_id" placeholder={this.props.user.first_name + ' ' + this.props.user.last_name} disabled />
+
+                            <Form.Field control={Input} label="Candidate" type="text" placeholder={this.props.target.firstName + ' ' + this.props.target.lastName} disabled />
+
+                            <Button color='green' onClick={() => this.setState({open: false})}>Log</Button>
+                        </Form>
+                    </Modal.Content>
+
+                </Modal>
             </div>
         )
     }
