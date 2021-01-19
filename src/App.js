@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import CandidateContainer from './Candidates/Containers/CandidateContainer';
 import ClientContainer from './Clients/Containers/ClientContainer';
 import HomeContainer from './Home/Containers/HomeContainer';
@@ -11,6 +11,7 @@ import Login from './Layout/Login';
 import { connect } from 'react-redux';
 import { startUserSession } from './Redux/users/actions';
 import Signup from './Layout/Signup';
+
 
 class App extends React.Component{
 
@@ -26,7 +27,7 @@ class App extends React.Component{
       <> 
       {this.props.user ?
       
-        <div className="App">
+        <div>
           <Navbar />
           <Switch>
 
