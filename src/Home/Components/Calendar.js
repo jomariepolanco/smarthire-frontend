@@ -43,14 +43,12 @@ class Calendar extends Component {
         //color change for calendar
         for (let pro in projects){
             if (pro.tasks){
-                [...this.props.projects].forEach(pro => {
-                    if (pro.title === 'Candidate' && pro.tasks.every(task => task.archived)){
-                        this.setState({candidateColor: 'green'})
-                    }
-                    if (pro.title === 'Client' && pro.tasks.every(task => task.archived)){
-                        this.setState({clientColor: 'green'})
-                    }
-                })
+                if (pro.title === 'Candidate' && pro.tasks.every(task => task.archived)){
+                    this.setState({candidateColor: 'green'})
+                }
+                if (pro.title === 'Client' && pro.tasks.every(task => task.archived)){
+                    this.setState({clientColor: 'green'})
+                }
             }
         }
     }
