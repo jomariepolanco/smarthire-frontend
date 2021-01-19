@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button, Form, Input, Modal } from 'semantic-ui-react'
 import { createNewCall } from '../../Redux/companies/actions'
 
 class CreateCallForm extends Component {
@@ -7,10 +8,11 @@ class CreateCallForm extends Component {
     state = {
         date: '',
         notes: '',
-        time: ''
+        time: '',
+        open: false
     }
 
-    changeHandler = (e) => {
+    changeHandler = (e, data) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
@@ -25,20 +27,25 @@ class CreateCallForm extends Component {
         }
 
         this.props.createNewCall(newCall)
+        this.setState({ppen: false})
     }
 
     render() {
         return (
             <div>
-                <button>Log a Call</button>
-                <form onSubmit={this.submitHandler}>
-                    <input type="date" name="date" value={this.state.date} onChange={this.changeHandler} />
-                    <input type="time" name="time" value={this.state.time} onChange={this.changeHandler} />
-                    <input type="text" name="notes" value={this.state.notes} onChange={this.changeHandler}/>
-                    <input type="text" name="user_id" placeholder={this.props.user.first_name + ' ' + this.props.user.last_name} disabled />
-                    <input type="text" placeholder={this.props.company.name} disabled />
-                    <button>Log</button>
-                </form>
+                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="green">Log a Call</Button>}>
+                    <Modal.Content>
+                        <Form onSubmit={this.submitHandler}>
+                            <Form.Field control={Input} label="Date" type="date" name="date" value={this.state.date} onChange={this.changeHandler} />
+                            <Form.Field control={Input} type="time" name="time" label="Time" value={this.state.time} onChange={this.changeHandler} />
+                            <Form.Field control={Input} type="text" name="notes" label="Notes on Call" value={this.state.notes} onChange={this.changeHandler}/>
+                            <Form.Field label="Your Name" control={Input} type="text" name="user_id" placeholder={this.props.user.first_name + ' ' + this.props.user.last_name} disabled />
+                            <Form.Field label="Company" control={Input} type="text" placeholder={this.props.company.name} disabled />
+                            <Button color="green">Log</Button>
+                        </Form>
+                    </Modal.Content>
+                </Modal>
+                
             </div>
         )
     }

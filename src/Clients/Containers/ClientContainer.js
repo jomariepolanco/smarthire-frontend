@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import SearchForm from '../../sharedComponents/SearchForm'
-import {getCompanies, updateCompany} from '../../Redux/companies/actions'
+import {createJob, getCompanies, updateCompany} from '../../Redux/companies/actions'
 import ClientList from '../Components/ClientList';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import CompanyCard from '../Components/CompanyCard';
 import CreateClientForm from '../Components/CreateClientForm';
 import JobCard from '../../Jobs/Components/JobCard';
 import { getJobs } from '../../Redux/jobs/actions';
+import { Card } from 'semantic-ui-react';
 
 
 class ClientContainer extends Component {
@@ -30,7 +31,12 @@ class ClientContainer extends Component {
         this.props.updateCompany(companyId, updateObj)
     }
 
+    createJobFormSubmitHandler = (newObj) => {
+        this.props.createJob(newObj)
+    }
+
     render() {
+        console.log(this.props.jobs)
         return (
             <>
             {this.props.user ?
@@ -45,15 +51,21 @@ class ClientContainer extends Component {
                 <Route path='/clients/:id' render={({match}) => {
                     let id = +match.params.id 
                     let company = [...this.props.companies].find(co => co.id === id)
-                    return <CompanyCard company={company} updateCompany={this.updateCompanyHandler}/>
+                    return <CompanyCard createJobSubmitHandler={this.createJobFormSubmitHandler} company={company} updateCompany={this.updateCompanyHandler}/>
                 }} />
 
                 <Route path='/clients' render={(routerProps) => {
                     return (
                         <div>
-                            <SearchForm submitHandler={this.searchFormSubmit}/>
-                            <ClientList clients={this.state.searchedCompanies} />
-                            <CreateClientForm history={routerProps.history} />
+                            <Card fluid>
+                                <SearchForm submitHandler={this.searchFormSubmit}/>
+                            </Card>
+                            <Card fluid>
+                                <ClientList clients={this.state.searchedCompanies} />
+                            </Card>
+                            <Card fluid>
+                                <CreateClientForm history={routerProps.history} />
+                            </Card>
                         </div>
 
                     )
@@ -82,7 +94,8 @@ const mdp = (dispatch) => {
     return {
         getCompanies: () => dispatch(getCompanies()),
         updateCompany: (coId, updateObj) => dispatch(updateCompany(coId, updateObj)),
-        getJobs: () => dispatch(getJobs())
+        getJobs: () => dispatch(getJobs()),
+        createJob: (obj) => dispatch(createJob(obj))
     }
 }
 export default connect(msp, mdp)(ClientContainer);

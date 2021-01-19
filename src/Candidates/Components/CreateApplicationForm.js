@@ -54,6 +54,7 @@ export default class CreateApplicationForm extends Component {
             }
         }
         this.props.submitHandler(newApp)
+        this.setState({open: false})
     }
 
     render() {
@@ -77,7 +78,7 @@ export default class CreateApplicationForm extends Component {
                                 <Form.Radio label="Green" name="color" value='green' checked={this.state.color === 'green'} onChange={this.changeHandler} />
                             </Form.Group>
 
-                            <Button color="green" onClick={() => this.setState({open: false})}>Create Application</Button>
+                            <Button color="green">Create Application</Button>
                         </Form>
                     </Modal.Content>
                 </Modal>

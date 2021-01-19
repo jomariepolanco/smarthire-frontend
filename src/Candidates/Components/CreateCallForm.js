@@ -12,8 +12,8 @@ class CreateCallForm extends Component {
         open: false
     }
 
-    changeHandler = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+    changeHandler = (e, data) => {
+        this.setState({[data.name]: data.value})
     }
 
     submitHandler = (e) => {
@@ -25,12 +25,11 @@ class CreateCallForm extends Component {
             user_id: this.props.user.id,
             candidate_id: this.props.target.id
         }
-
         this.props.createCandidateCall(newCallObj)
+        this.setState({open: false})
     }
 
     render() {
-        console.log(this.state)
         return (
             <div>
                 <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color='green'>Log a Call</Button>}>
@@ -46,7 +45,7 @@ class CreateCallForm extends Component {
 
                             <Form.Field control={Input} label="Candidate" type="text" placeholder={this.props.target.firstName + ' ' + this.props.target.lastName} disabled />
 
-                            <Button color='green' onClick={() => this.setState({open: false})}>Log</Button>
+                            <Button color='green'>Log</Button>
                         </Form>
                     </Modal.Content>
 

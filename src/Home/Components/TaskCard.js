@@ -5,8 +5,8 @@ import { updateTask } from '../../Redux/tasks/actions'
 
 class TaskCard extends Component {
 
-    clickHandler = (e) => {
-        const taskId = +e.target.value 
+    clickHandler = (e, data) => {
+        const taskId = +data.value 
         let updateObj;
         if (this.props.task.archived){
             updateObj = {archived: false}

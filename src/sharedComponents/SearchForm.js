@@ -19,7 +19,7 @@ export default class SearchForm extends Component {
         return (
             <div>
                 <Form onSubmit={this.submitHandler}>
-                    <Form.Field control={Input} label="Search By Candidate Name" type="text" name="name" placeholder="Search By Name" value={this.state.name} onChange={this.changeHandler} />
+                    <Form.Field control={Input} label="Search By Name" type="text" name="name" placeholder="Search By Name" value={this.state.name} onChange={this.changeHandler} />
                     <Button color='blue'>Submit</Button>
                 </Form>
             </div>

@@ -1,3 +1,4 @@
+import { CREATE_JOB_IN_JOBS } from "../jobs/actionTypes"
 import { CREATE_JOB_FOR_COMPANY, CREATE_NEW_CALL_FOR_COMPANY, CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes"
 
 export function getCompanies(){
@@ -79,6 +80,9 @@ export function createJob(jobObj){
             body: JSON.stringify(jobObj)
         })
         .then(r => r.json())
-        .then(newJobObj => dispatch({type: CREATE_JOB_FOR_COMPANY, payload: newJobObj}))
+        .then(newJobObj => {
+            dispatch({type: CREATE_JOB_FOR_COMPANY, payload: newJobObj})
+            dispatch({type: CREATE_JOB_IN_JOBS, payload: newJobObj})
+        })
     }
 }

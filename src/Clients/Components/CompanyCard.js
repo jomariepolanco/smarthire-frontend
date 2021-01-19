@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom'
 import JobsContainer from '../../Jobs/Containers/JobsContainer'
 import { connect } from 'react-redux'
 import { createJob } from '../../Redux/companies/actions'
+import {getJobs} from '../../Redux/jobs/actions'
+import { Grid, Segment } from 'semantic-ui-react'
 
 
 class CompanyCard extends Component {
@@ -28,27 +30,45 @@ class CompanyCard extends Component {
         this.props.updateCompany(this.props.company.id, updateObj)
     }
 
-    createJobFormSubmitHandler = (newObj) => {
-        this.props.createJob(newObj)
-    }
-
     render() {
-        console.log(this.props.companies, this.props.company)
+        console.log(this.props.company.jobs)
         return (
             <div>
                 <h1>{this.props.company.name}</h1>
-                <Form value={this.state.name} name="name" changeHandler={this.changeHandler} placeholder="Name" submitHandler={this.submitHandler}/>
-                <Form value={this.state.industry} name="industry" changeHandler={this.changeHandler} placeholder="Industry" submitHandler={this.submitHandler}/>
-                <Form value={this.state.address} name="address" changeHandler={this.changeHandler} placeholder="Address" submitHandler={this.submitHandler}/>
-                <Form value={this.state.poc_name} name="poc_name" changeHandler={this.changeHandler} placeholder="Point of Contact Name" submitHandler={this.submitHandler}/>
-                <Form value={this.state.poc_email} name="poc_email" changeHandler={this.changeHandler} placeholder="Point of Contact Email" submitHandler={this.submitHandler}/>
-                <Form value={this.state.poc_number} name="poc_number" changeHandler={this.changeHandler} placeholder="Point of Contact Phone Number" submitHandler={this.submitHandler}/>
+                <Grid columns={2} divided>
+                    <Grid.Row stretched>
+                        <Grid.Column>
+                            <Segment>
+                                <Form value={this.state.name} name="name" changeHandler={this.changeHandler} placeholder="Name" submitHandler={this.submitHandler}/>
 
-                <CallContainer company={this.props.company} calls={this.props.company.calls}/>
+                                <Form value={this.state.industry} name="industry" changeHandler={this.changeHandler} placeholder="Industry" submitHandler={this.submitHandler}/>
 
-                <NotesCard company={this.props.company} notes={this.props.company.notes} />
+                                <Form value={this.state.address} name="address" changeHandler={this.changeHandler} placeholder="Address" submitHandler={this.submitHandler}/>
 
-                <JobsContainer submitHandler={this.createJobFormSubmitHandler} company={this.props.company} jobs={this.props.company.jobs} />
+                                <Form value={this.state.poc_name} name="poc_name" changeHandler={this.changeHandler} placeholder="Point of Contact Name" submitHandler={this.submitHandler}/>
+
+                                <Form value={this.state.poc_email} name="poc_email" changeHandler={this.changeHandler} placeholder="Point of Contact Email" submitHandler={this.submitHandler}/>
+
+                                <Form value={this.state.poc_number} name="poc_number" changeHandler={this.changeHandler} placeholder="Point of Contact Phone Number" submitHandler={this.submitHandler}/>
+                            </Segment>
+                            <Segment>
+                                <CallContainer company={this.props.company} calls={this.props.company.calls}/>
+                            </Segment>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Segment>
+                                <NotesCard company={this.props.company} notes={this.props.company.notes} />
+                            </Segment>
+                            <Segment>
+                                <JobsContainer submitHandler={this.props.createJobSubmitHandler} company={this.props.company} jobs={this.props.company.jobs} />
+                            </Segment>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+                
+
+
+
             </div>
         )
     }
@@ -60,10 +80,5 @@ const msp = (state) => {
     }
 }
 
-const mdp = (dispatch) => {
-    return {
-        createJob: (newObj) => dispatch(createJob(newObj))
-    }
-}
 
-export default connect(msp, mdp)(CompanyCard);
+export default connect(msp)(CompanyCard);

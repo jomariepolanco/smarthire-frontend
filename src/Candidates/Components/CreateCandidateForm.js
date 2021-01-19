@@ -18,7 +18,7 @@ class CreateCandidateForm extends Component {
         open: false
     }
 
-    changeHandler = (e) => {
+    changeHandler = (e, data) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
@@ -36,6 +36,7 @@ class CreateCandidateForm extends Component {
             zipcode: this.state.zipcode
         }
         this.props.createNewCandidate(newCandy, this.props.history)
+        this.setState({open: false})
         //push to candidates show page when hit submit
     }
 

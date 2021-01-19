@@ -3,6 +3,7 @@ import ApplicationContainer from '../Containers/ApplicationContainer'
 
 
 export default class JobCard extends Component {
+
     render() {
         const {job} = this.props
         console.log(job)

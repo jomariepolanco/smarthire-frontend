@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { List } from 'semantic-ui-react'
 import CreateJobForm from '../Components/CreateJobForm'
 
 class JobsContainer extends Component {
@@ -8,10 +9,11 @@ class JobsContainer extends Component {
         return [...this.props.jobs].map(job => {
             return(
                 <>
-                <NavLink to={`/clients/${this.props.company.id}/jobs/${job.id}`}>
-                    {job.title}
-                </NavLink>
-                <br />
+                    <List.Item>
+                        <NavLink to={`/clients/${this.props.company.id}/jobs/${job.id}`}>
+                            {job.title}
+                        </NavLink>
+                    </List.Item>
                 </>
             )
     })
@@ -22,7 +24,9 @@ class JobsContainer extends Component {
         return (
             <div>
                 <h3>Jobs</h3>
-                {this.renderJobsList()}
+                <List divided relaxed>
+                    {this.renderJobsList()}
+                </List>
                 <CreateJobForm submitHandler={this.props.submitHandler} company={this.props.company} />
             </div>
         )
