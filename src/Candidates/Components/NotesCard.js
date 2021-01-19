@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button, Form, TextArea } from 'semantic-ui-react'
 import { updateCandidate } from '../../Redux/candidates/actions'
 
 class NotesCard extends Component {
@@ -21,10 +22,10 @@ class NotesCard extends Component {
         return (
             <div>
                 <h3>Notes</h3>
-                <form onSubmit={this.submitHandler}>
-                    <input type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
-                    <button>Update Note</button>
-                </form>
+                <Form size="huge" widths="equal" onSubmit={this.submitHandler}>
+                    <Form.TextArea control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
+                    <Button color="blue">Update Note</Button>
+                </Form>
                 
             </div>
         )
