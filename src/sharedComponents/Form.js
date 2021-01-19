@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button, Form, Icon, Input } from 'semantic-ui-react'
 
 export default class FormInput extends Component {
 
@@ -12,10 +13,14 @@ export default class FormInput extends Component {
     
     render() {
         return (
-            <form onSubmit={this.submitHandler}>
-                <input type="text" value={this.props.value} name={this.props.name} onChange={this.props.changeHandler} placeholder={this.props.placeholder}/>
-                <button>Update</button>
-            </form>
+            <Form onSubmit={this.submitHandler}>
+                <Form.Group widths="equal">
+                    <Form.Field width="3" control={Input} label={this.props.placeholder} type="text" value={this.props.value} name={this.props.name} onChange={this.props.changeHandler} placeholder={this.props.placeholder}/>
+                    <Button color="green">
+                        <Icon color="white" name="redo" />
+                    </Button>
+                </Form.Group>
+            </Form>
         )
     }
 }

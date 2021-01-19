@@ -1,18 +1,27 @@
 import React, { Component } from 'react'
+import { Button, Form, Input, Modal, Select } from 'semantic-ui-react'
 
 export default class CreateApplicationForm extends Component {
 
     state = {
         job: '',
-        color: ''
+        color: '',
+        open: false
     }
 
     renderOptionTag = () => {
-        return [...this.props.jobs].map(job => <option key={job.id} value={job.id}>{job.title}(Company Name Goes Here)</option>)
+        let options = [];
+        [...this.props.jobs].forEach(job => {
+            options.push({key: job.id, text: `${job.title}(Company Name here)`, value: job.id})
+                // <option key={job.id} value={job.id}>{job.title}(Company Name Goes Here)</option>
+        })
+
+        return options
+        
     }
 
-    changeHandler = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+    changeHandler = (e, data) => {
+        this.setState({[data.name]: data.value})
     }
 
     submitHandler = (e) => {
@@ -48,30 +57,30 @@ export default class CreateApplicationForm extends Component {
     }
 
     render() {
-        console.log(this.props.jobs)
+        console.log(this.state)
         return (
             <div>
-                <button>Create Application</button>
-                <form onSubmit={this.submitHandler}>
-                    <input type="text" disabled placeholder={this.props.candidate.firstName + ' ' + this.props.candidate.lastName} /> 
+                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="blue">Create Application</Button>}>
+                    <Modal.Content>
+                        <Form onSubmit={this.submitHandler}>
+                            <Form.Field control={Input} label="Candidate" type="text" disabled value={this.props.candidate.name} /> 
 
-                    {/* radio buttons open jobs */}
-                    <label>Choose Job:</label>
-                    <select name="job" onChange={this.changeHandler}>
-                        {this.renderOptionTag()}
-                    </select>
+                            {/* dropdown buttons open jobs */}
+                            <Form.Field control={Select} label="Choose Job:" name="job" onChange={this.changeHandler} options={this.renderOptionTag()}/>
 
 
-                    {/* radio buttons for red, green, yellow */}
-                    <input type="radio" value="red" name="color" onChange={this.changeHandler}/>
-                    <label>Red</label>
-                    <input type="radio" value="green" name="color" onChange={this.changeHandler}/>
-                    <label>Green</label>
-                    <input type="radio" value="yellow" name="color" onChange={this.changeHandler}/>
-                    <label>Yellow</label>
+                            {/* radio buttons for red, green, yellow */}
+                            <Form.Group inline>
+                                <label>Color</label>
+                                <Form.Radio label="Red" name="color" value='red' checked={this.state.color === 'red'} onChange={this.changeHandler} />
+                                <Form.Radio label="Yellow" name="color" value='yellow' checked={this.state.color === 'yellow'} onChange={this.changeHandler} />
+                                <Form.Radio label="Green" name="color" value='green' checked={this.state.color === 'green'} onChange={this.changeHandler} />
+                            </Form.Group>
 
-                    <button>Create Application</button>
-                </form>
+                            <Button color="green" onClick={() => this.setState({open: false})}>Create Application</Button>
+                        </Form>
+                    </Modal.Content>
+                </Modal>
             </div>
         )
     }
