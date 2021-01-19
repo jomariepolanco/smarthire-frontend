@@ -34,6 +34,7 @@ class CandidateCard extends Component {
     }
 
     render() {
+        console.log(this.props.candidate)
         return (
             <div>
                 <h1>{this.props.candidate.firstName} {this.props.candidate.lastName}</h1>
@@ -67,7 +68,8 @@ class CandidateCard extends Component {
 
 const msp = (state) => {
     return {
-        jobs: state.jobs
+        jobs: state.jobs,
+        candidates: state.candidates
     }
 }
 
