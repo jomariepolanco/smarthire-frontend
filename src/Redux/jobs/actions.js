@@ -1,4 +1,4 @@
-import { CREATE_JOB, GET_JOBS } from "./actionTypes"
+import { GET_JOBS } from "./actionTypes"
 
 export function getJobs(){
     const token = localStorage.getItem('token')
@@ -14,18 +14,3 @@ export function getJobs(){
     }
 }
 
-export function createJob(jobObj){
-    const token = localStorage.getItem('token')
-    return function(dispatch){
-        fetch('http://localhost:3000/api/v1/open_jobs', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(jobObj)
-        })
-        .then(r => r.json())
-        .then(newJobObj => dispatch({type: CREATE_JOB, payload: newJobObj}))
-    }
-}

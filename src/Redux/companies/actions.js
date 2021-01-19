@@ -1,4 +1,4 @@
-import { CREATE_NEW_CALL_FOR_COMPANY, CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes"
+import { CREATE_JOB_FOR_COMPANY, CREATE_NEW_CALL_FOR_COMPANY, CREATE_NEW_COMPANY, GET_ALL_COMPANIES, UPDATE_COMPANY } from "./actionTypes"
 
 export function getCompanies(){
     const token = localStorage.getItem('token')
@@ -61,5 +61,21 @@ export function createNewCall(newCallObj){
         .then(newCall => {
             dispatch({type: CREATE_NEW_CALL_FOR_COMPANY, payload: newCall})
         })
+    }
+}
+
+export function createJob(jobObj){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch('http://localhost:3000/api/v1/open_jobs', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(jobObj)
+        })
+        .then(r => r.json())
+        .then(newJobObj => dispatch({type: CREATE_JOB_FOR_COMPANY, payload: newJobObj}))
     }
 }

@@ -4,9 +4,11 @@ import Form from '../../sharedComponents/Form'
 import NotesCard from './NotesCard'
 import { NavLink } from 'react-router-dom'
 import JobsContainer from '../../Jobs/Containers/JobsContainer'
+import { connect } from 'react-redux'
+import { createJob } from '../../Redux/companies/actions'
 
 
-export default class CompanyCard extends Component {
+class CompanyCard extends Component {
 
 
     state= {
@@ -26,7 +28,12 @@ export default class CompanyCard extends Component {
         this.props.updateCompany(this.props.company.id, updateObj)
     }
 
+    createJobFormSubmitHandler = (newObj) => {
+        this.props.createJob(newObj)
+    }
+
     render() {
+        console.log(this.props.companies, this.props.company)
         return (
             <div>
                 <h1>{this.props.company.name}</h1>
@@ -41,8 +48,22 @@ export default class CompanyCard extends Component {
 
                 <NotesCard company={this.props.company} notes={this.props.company.notes} />
 
-                <JobsContainer company={this.props.company} jobs={this.props.company.jobs} />
+                <JobsContainer submitHandler={this.createJobFormSubmitHandler} company={this.props.company} jobs={this.props.company.jobs} />
             </div>
         )
     }
 }
+
+const msp = (state) => {
+    return {
+        companies: state.companies
+    }
+}
+
+const mdp = (dispatch) => {
+    return {
+        createJob: (newObj) => dispatch(createJob(newObj))
+    }
+}
+
+export default connect(msp, mdp)(CompanyCard);
