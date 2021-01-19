@@ -16,8 +16,10 @@ export default class AppCard extends Component {
         const {application} = this.props
         return (
             <div>
-                <h4 style={{color: this.renderColor()}}>{application.candidate}</h4>
+                <h4 style={{color: this.renderColor}}>{application.candidate}</h4>
             </div>
         )
     }
 }
+
+//Candidate names are links to their show page????
