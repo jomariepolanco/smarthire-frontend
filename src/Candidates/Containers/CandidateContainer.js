@@ -7,6 +7,7 @@ import CandidateList from '../Components/CandidateList'
 import CreateCandidateForm from '../Components/CreateCandidateForm'
 import SearchForm from '../../sharedComponents/SearchForm'
 import { getJobs } from '../../Redux/jobs/actions'
+import { Card } from 'semantic-ui-react'
 
 class CandidateContainer extends Component {
 
@@ -44,9 +45,15 @@ class CandidateContainer extends Component {
                     <Route path='/candidates' render={(routerProps) => {
                         return (
                             <div>
-                                <SearchForm  submitHandler={this.searchFormSubmit}/>
-                                <CandidateList candidates={this.state.searchedCandies} />
-                                <CreateCandidateForm history={routerProps.history} />
+                                <Card fluid>
+                                    <SearchForm  submitHandler={this.searchFormSubmit}/>
+                                </Card>
+                                <Card fluid>
+                                    <CandidateList candidates={this.state.searchedCandies} />
+                                </Card>
+                                <Card fluid>
+                                    <CreateCandidateForm history={routerProps.history} />
+                                </Card>
                             </div>
 
                         )
