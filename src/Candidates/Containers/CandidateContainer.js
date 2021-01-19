@@ -6,6 +6,7 @@ import CandidateCard from '../Components/CandidateCard'
 import CandidateList from '../Components/CandidateList'
 import CreateCandidateForm from '../Components/CreateCandidateForm'
 import SearchForm from '../../sharedComponents/SearchForm'
+import { getJobs } from '../../Redux/jobs/actions'
 
 class CandidateContainer extends Component {
 
@@ -15,6 +16,7 @@ class CandidateContainer extends Component {
 
     componentDidMount(){
         this.props.getCandidates()
+        this.props.getJobs()
     }
 
     searchFormSubmit = (name) => {
@@ -75,7 +77,8 @@ const msp = (state) => {
 const mdp = (dispatch) => {
     return {
         getCandidates: () => dispatch(getCandidates()),
-        updateCandidate: (candidateId, updateObj) => dispatch(updateCandidate(candidateId, updateObj))
+        updateCandidate: (candidateId, updateObj) => dispatch(updateCandidate(candidateId, updateObj)),
+        getJobs: () => dispatch(getJobs())
     }
 }
 
