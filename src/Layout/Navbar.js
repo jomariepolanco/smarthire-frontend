@@ -1,41 +1,44 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
 import Logout from './Logout'
 
 export default class Navbar extends Component {
 
+    state = {
+        activeItem: ''
+    }
+
+    handleItemClick = (e, {name}) => this.setState({activeItem: name})
+
+
     render() {
+        const {activeItem} = this.state
         return (
-            <ul>
-                    <li>
-                        <NavLink to='/home'>
+            <Menu secondary>
+                    <Menu.Item name='home' active={activeItem === 'home'}
+                    onClick={this.handleItemClick}
+                    as={NavLink} to='/home'>
                             Home 
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/candidates'>
+                    </Menu.Item>
+                    <Menu.Item name='candidates' active={activeItem === 'candidates'} onClick={this.handleItemClick} as={NavLink} to='/candidates'>
                             Candidates
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/clients'>
+                    </Menu.Item>
+                    <Menu.Item name='clients' active={activeItem === 'clients'} onClick={this.handleItemClick} as={NavLink} to='/clients'>
                             Clients
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/login'>
-                            Login
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/signup'>
-                            Sign Up
-                        </NavLink>
-                    </li>
-                    <li>
-                        <Logout />
-                    </li>
-            </ul>
+                    </Menu.Item>
+                    <Menu.Item position='right'>
+                        <Menu.Item name='login' active={activeItem === 'login'} onClick={this.handleItemClick} as={NavLink} to='/login'>
+                                Login
+                        </Menu.Item>
+                        <Menu.Item name='signup' active={activeItem === 'signup'} onClick={this.handleItemClick} as={NavLink} to='/signup'>
+                                Sign Up
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Logout />
+                        </Menu.Item>
+                    </Menu.Item>
+            </Menu>
         )
     }
 }
