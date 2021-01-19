@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button, Form, Input } from 'semantic-ui-react'
 import { signUpUser } from '../Redux/users/actions'
 
 class Signup extends Component {
@@ -23,16 +24,17 @@ class Signup extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.submitHandler}>
-                    <input type="text" name="first_name" value={this.state.first_name} placeholder="First Name" onChange={this.changeHandler} />
-                    <input type="text" name="last_name" value={this.state.last_name} onChange={this.changeHandler} placeholder="Last Name" />
+                <h1 style={{textAlign: 'center'}}>HireSmart</h1>
+                <Form onSubmit={this.submitHandler}>
+                    <Form.Field control={Input} label="First Name" type="text" name="first_name" value={this.state.first_name} placeholder="First Name" onChange={this.changeHandler} />
+                    <Form.Field control={Input} label="Last Name" type="text" name="last_name" value={this.state.last_name} onChange={this.changeHandler} placeholder="Last Name" />
 
-                    <input type="text" name="email" value={this.state.email} onChange={this.changeHandler} placeholder="Email" />
+                    <Form.Field control={Input} label="Email" type="text" name="email" value={this.state.email} onChange={this.changeHandler} placeholder="Email" />
 
-                    <input type="password" name="password" value={this.state.password} onChange={this.changeHandler} placeholder="Password" />
+                    <Form.Field control={Input} label="Password" type="password" name="password" value={this.state.password} onChange={this.changeHandler} placeholder="Password" />
 
-                    <button>Sign Up</button>
-                </form>
+                    <Button color='blue'>Sign Up</Button>
+                </Form>
             </div>
         )
     }
