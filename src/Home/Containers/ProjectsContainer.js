@@ -79,6 +79,7 @@ class ProjectsContainer extends Component {
         )
     }
     render() {
+        console.log(this.props.tasks)
         return (
             <div>
                 <Grid divided='vertically'>

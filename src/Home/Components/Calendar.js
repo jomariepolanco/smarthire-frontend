@@ -55,10 +55,9 @@ class Calendar extends Component {
 
     dateClickHandler = (info) => {
         const projects = [...this.props.projects].filter(project => project.date === info.dateStr)
-
         //get tasks for above projects
-        const projectOneId = [...this.props.projects][0].id
-        const projectTwoId = [...this.props.projects][1].id
+        const projectOneId = projects[0].id
+        const projectTwoId = projects[1].id
         this.props.getProjectsTasks(projectOneId, projectTwoId)
         
         if (projects.length <=0 && info.date < new Date()){
