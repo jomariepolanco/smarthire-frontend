@@ -16,42 +16,31 @@ export default class Navbar extends Component {
     render() {
         const {activeItem} = this.state
         return (
-            <Wrapper secondary>
-                    <MenuItems name='home' active={activeItem === 'home'}
+            <Menu secondary>
+                    <Menu.Item name='home' active={activeItem === 'home'}
                     onClick={this.handleItemClick}
                     as={NavLink} to='/home'>
                             Home 
-                    </MenuItems>
-                    <MenuItems name='candidates' active={activeItem === 'candidates'} onClick={this.handleItemClick} as={NavLink} to='/candidates'>
-                            Candidates
-                    </MenuItems>
-                    <MenuItems name='clients' active={activeItem === 'clients'} onClick={this.handleItemClick} as={NavLink} to='/clients'>
-                            Clients
-                    </MenuItems>
-                    <Menu.Item position='right'>
-                        <MenuItems name='login' active={activeItem === 'login'} onClick={this.handleItemClick} as={NavLink} to='/login'>
-                                Login
-                        </MenuItems>
-                        <MenuItems name='signup' active={activeItem === 'signup'} onClick={this.handleItemClick} as={NavLink} to='/signup'>
-                                Sign Up
-                        </MenuItems>
-                        <MenuItems>
-                            <Logout />
-                        </MenuItems>
                     </Menu.Item>
-            </Wrapper>
+                    <Menu.Item name='candidates' active={activeItem === 'candidates'} onClick={this.handleItemClick} as={NavLink} to='/candidates'>
+                            Candidates
+                    </Menu.Item>
+                    <Menu.Item name='clients' active={activeItem === 'clients'} onClick={this.handleItemClick} as={NavLink} to='/clients'>
+                            Clients
+                    </Menu.Item>
+                    <Menu.Item position='right'>
+                        <Menu.Item name='login' active={activeItem === 'login'} onClick={this.handleItemClick} as={NavLink} to='/login'>
+                                Login
+                        </Menu.Item>
+                        <Menu.Item name='signup' active={activeItem === 'signup'} onClick={this.handleItemClick} as={NavLink} to='/signup'>
+                                Sign Up
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Logout />
+                        </Menu.Item>
+                    </Menu.Item>
+            </Menu>
         )
     }
 }
 
-const Wrapper = styled(Menu)`
-    &&& {
-        background-color: white;
-    }
-`
-
-const MenuItems = styled(Menu.Item)`
-    &&& {
-        
-    }
-`

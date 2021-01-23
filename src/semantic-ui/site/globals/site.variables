@@ -3,4 +3,4 @@
 *******************************/
 
 @primaryColor: #002f4e;
-@pageBackground: linear-gradient(to right top, #65dfc9, #6cdbeb);
+@pageBackground: #fcfcfc;

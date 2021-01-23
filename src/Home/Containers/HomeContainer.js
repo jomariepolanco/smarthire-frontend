@@ -19,15 +19,9 @@ class HomeContainer extends Component {
             <>
             {this.props.user ?
                 <>
-                <Wrapper>
+                <div>
                     <Calendar history={this.props.routerProps.history} />
-                </Wrapper>
-                <CircleOne>
-                    <div></div>
-                </CircleOne>
-                <CircleTwo>
-                    <div></div>
-                </CircleTwo>
+                </div>
                 </>
         
             :
@@ -55,29 +49,3 @@ const mdp = (dispatch) => {
 
 export default connect(msp, mdp)(HomeContainer);
 
-const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const CircleOne = styled.div`
-    background: white;
-    background: linear-gradient(to right bottom, rgba(255,255, 255, 1), rgba(255,255,255,0.5));
-    height: 20rem;
-    width: 20rem;
-    position: absolute;
-    top: 5%;
-    right: 15%;
-    border-radius: 50%;
-`
-const CircleTwo = styled.div`
-    background: white;
-    background: linear-gradient(to right bottom, rgba(255,255, 255, 0.9), rgba(255,255,255,0.1));
-    height: 20rem;
-    width: 20rem;
-    position: absolute;
-    bottom: 5%;
-    left: 10%;
-    border-radius: 50%;
-`

@@ -82,10 +82,10 @@ class Calendar extends Component {
                 } />
                 <Route path='/home' render={() => {
                     return (
-                        <Wrapper>
+                        <div>
                             <FullCalendar plugins={[dayGridPlugin, interactionPlugin]}  dateClick={this.dateClickHandler} events={[{daysOfWeek: [1,2,3,4,5], title: 'Candidate Task List', backgroundColor: this.state.candidateColor
                         }, {daysOfWeek: [1,2,3,4,5], title: 'Client Task List', backgroundColor: this.state.clientColor}]}  />
-                        </Wrapper>
+                        </div>
                     )
                 }} />
             </Switch>
@@ -94,15 +94,7 @@ class Calendar extends Component {
     }
 }
 
-const Wrapper = styled.div`
-    background: white;
-    min-height: 80vh;
-    width: 60%;
-    background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
-    border-radius: 2rem;
-    z-index: 2;
-    backdrop-filter: blur(2rem);
-`
+
 
 
 const msp = (state) => {
