@@ -9,6 +9,7 @@ import CreateClientForm from '../Components/CreateClientForm';
 import JobCard from '../../Jobs/Components/JobCard';
 import { getJobs } from '../../Redux/jobs/actions';
 import { Card } from 'semantic-ui-react';
+import IndustrySearchForm from '../Components/IndustrySearchForm';
 
 
 class ClientContainer extends Component {
@@ -25,6 +26,11 @@ class ClientContainer extends Component {
     searchFormSubmit = (name) => {
         const searchedCompanies = [...this.props.companies].filter(co => co.name.toLowerCase().includes(name.toLowerCase()))
         this.setState({searchedCompanies: searchedCompanies})
+    }
+
+    industryFormSubmit = (industry) => {
+        const searched = [...this.props.companies].filter(co => co.industry.toLowerCase().includes(industry.toLowerCase()))
+        this.setState({searchedCompanies: searched})
     }
 
     updateCompanyHandler = (companyId, updateObj) => {
@@ -59,6 +65,9 @@ class ClientContainer extends Component {
                         <div>
                             <Card fluid>
                                 <SearchForm submitHandler={this.searchFormSubmit}/>
+                            </Card>
+                            <Card fluid>
+                                <IndustrySearchForm submitHandler={this.industryFormSubmit}/>
                             </Card>
                             <Card fluid>
                                 <ClientList clients={this.state.searchedCompanies} />
