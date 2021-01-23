@@ -3,6 +3,7 @@ import ProjectCard from '../Components/ProjectCard'
 import {Card, Grid, Item} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {createTask, getProjectsTasks} from '../../Redux/tasks/actions'
+import CreateProjectForm from '../Components/CreateProjectForm'
 
 class ProjectsContainer extends Component {
 
@@ -45,57 +46,34 @@ class ProjectsContainer extends Component {
         }
     }
 
-    renderCandidateProject = () => {
-        const candidate = [...this.props.projects].find(pro => pro.title === "Candidate")
-        const candidateTasks = [...this.props.tasks].filter(task => task.projectId === candidate.id)
-        return(
-            <Card centered fluid>
+    renderProjects = () => {
+        return [...this.props.projects].map(project => {
+            const tasks = [...this.props.tasks].filter(task => task.projectId === project.id)
+            return(
+                <Grid.Row key={project.id} columns={1}>
+                    <Grid.Column>
+                    <Card centered fluid>
                 <Item>
                     <Card.Header as='h1' textAlign='center'>
-                        {candidate.title}
+                        {project.title}
                     </Card.Header>
                     <Card.Content>
-                        <ProjectCard project={candidate} tasks={candidateTasks}/>
+                        <ProjectCard project={project} tasks={tasks}/>
                     </Card.Content>
                 </Item>
             </Card>
+                    </Grid.Column>
+                </Grid.Row>
             )
-    }
-
-    renderClientProject = () => {
-        const client = [...this.props.projects].find(pro => pro.title === "Client")
-        const clientTasks = [...this.props.tasks].filter(task => task.projectId === client.id)
-        return(
-            <Card centered fluid>
-                <Item>
-                    <Card.Header as='h1' textAlign='center'>
-                        {client.title}
-                    </Card.Header>
-                    <Card.Content>
-                        <ProjectCard project={client} tasks={clientTasks}/>
-                    </Card.Content>
-                </Item>
-            </Card>
-        )
+        })
     }
     render() {
         console.log(this.props.tasks)
         return (
             <div>
+                <CreateProjectForm />
                 <Grid divided='vertically'>
-                    <Grid.Row columns={1}>
-                        <Grid.Column>
-                            {this.renderCandidateProject()}
-
-                        </Grid.Column>
-                    </Grid.Row>
-                    
-                    <Grid.Row columns={1}>
-                        <Grid.Column>
-                            {this.renderClientProject()}
-                        </Grid.Column>
-                    </Grid.Row>
-
+                    {this.renderProjects()}
                 </Grid>
             </div>
         )

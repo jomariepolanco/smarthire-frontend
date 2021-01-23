@@ -76,7 +76,9 @@ class Calendar extends Component {
             <Switch>
                 <Route path='/home/projects/:date' render={({match}) => {
                     let projectDate = match.params.date
+                    
                     let projects = [...this.props.projects].filter(project => project.date === projectDate)
+
                    return <ProjectsContainer candidates={this.props.candidates} companies={this.props.companies} projects={projects} />
                 }
                 } />
