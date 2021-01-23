@@ -8,6 +8,7 @@ import CreateCandidateForm from '../Components/CreateCandidateForm'
 import SearchForm from '../../sharedComponents/SearchForm'
 import { getJobs } from '../../Redux/jobs/actions'
 import { Card } from 'semantic-ui-react'
+import ApplicationSearchForm from '../Components/ApplicationSearchForm'
 
 class CandidateContainer extends Component {
 
@@ -24,6 +25,19 @@ class CandidateContainer extends Component {
         const searchedCandies = [...this.props.candidates].filter(candy => candy.firstName.toLowerCase().includes(name.toLowerCase()) || candy.lastName.toLowerCase().includes(name.toLowerCase()))
         this.setState({searchedCandies: searchedCandies})
     }
+
+    appSearchHandler = (color) => {
+        const searched = [...this.props.candidates].filter(candy => {
+            if (color.toLowerCase() === 'green'){
+                return candy.applications.some(app => app.green)
+            } else if (color.toLowerCase() === 'yellow'){
+                return candy.applications.some(app => app.yellow)
+            } else if (color.toLowerCase() === 'red'){
+                return candy.applications.some(app => app.red)
+            }
+        })
+        this.setState({searchedCandies: searched})
+        }
 
     updateCandidateHandler = (candyId, updateObj) => {
         this.props.updateCandidate(candyId, updateObj)
@@ -47,6 +61,9 @@ class CandidateContainer extends Component {
                             <div>
                                 <Card fluid>
                                     <SearchForm  submitHandler={this.searchFormSubmit}/>
+                                </Card>
+                                <Card fluid>
+                                    <ApplicationSearchForm submitHandler={this.appSearchHandler}/>
                                 </Card>
                                 <Card fluid>
                                     <CandidateList candidates={this.state.searchedCandies} />
