@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Grid, Segment } from 'semantic-ui-react'
 import { createApplication } from '../../Redux/applications/actions'
 import FormInput from '../../sharedComponents/Form'
+import ApplicationContainer from '../Containers/ApplicationContainer'
 import CallContainer from '../Containers/CallContainer'
 import CreateApplicationForm from './CreateApplicationForm'
 import NotesCard from './NotesCard'
@@ -61,7 +62,6 @@ class CandidateCard extends Component {
                         
                             <FormInput value={this.state.zipcode} name="zipcode" changeHandler={this.changeHandler} placeholder="Zipcode" submitHandler={this.submitHandler}/>
                         </Segment>
-                            <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.createAppSubmitHandler}/>
                         <Segment>
                             <CallContainer target={this.props.candidate} calls={this.props.candidate.calls}/>
                         </Segment>
@@ -69,6 +69,10 @@ class CandidateCard extends Component {
                     <Grid.Column>
                         <Segment>
                             <NotesCard candidate={this.props.candidate} notes={this.props.candidate.notes}/>
+                        </Segment>
+                        <Segment>
+                            <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.createAppSubmitHandler}/>
+                            <ApplicationContainer applications={this.props.candidate.applications}/>
                         </Segment>
                     </Grid.Column>
                 </Grid.Row>
