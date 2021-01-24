@@ -4,3 +4,6 @@
 
 @primaryColor: #002f4e;
 @pageBackground: #fcfcfc;
+@pageFont: 'Fira Sans Condensed', sans-serif;
+@headerFont: 'Fira Sans Condensed', sans-serif;
+@googleFontFamily: 'Fira Sans Condensed', sans-serif;
