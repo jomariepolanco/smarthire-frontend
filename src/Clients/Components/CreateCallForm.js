@@ -27,7 +27,7 @@ class CreateCallForm extends Component {
         }
 
         this.props.createNewCall(newCall)
-        this.setState({ppen: false})
+        this.setState({open: false})
     }
 
     render() {

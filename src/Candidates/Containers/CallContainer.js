@@ -6,7 +6,8 @@ import CreateCallForm from '../Components/CreateCallForm'
 export default class CallContainer extends Component {
 
     renderCallCards = () => {
-        return [...this.props.calls].map(call => {
+        const calls = [...this.props.calls].sort((a, b) => new Date(a.date) - new Date(b.date)).reverse()
+        return calls.map(call => {
             return (
                 <>
                 <List.Item>
