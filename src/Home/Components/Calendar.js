@@ -43,10 +43,10 @@ class Calendar extends Component {
         //color change for calendar
         for (let pro in projects){
             if (pro.tasks){
-                if (pro.title === 'Candidate' && pro.tasks.every(task => task.archived)){
+                if (pro.title === 'Candidate' && pro.archived){
                     this.setState({candidateColor: '#62c370'})
                 }
-                if (pro.title === 'Client' && pro.tasks.every(task => task.archived)){
+                if (pro.title === 'Client' && pro.archived){
                     this.setState({clientColor: '#62c730'})
                 }
             }
@@ -54,13 +54,25 @@ class Calendar extends Component {
     }
 
     calendarEvents = () => {
-        return [...this.props.projects].map(pro => ({
-            title: `${pro.title} Task List`,
-            start: pro.date,
-            end: pro.date,
-            backgroundColor: this.state[`${pro.title.toLowerCase()}Color`]
+        return [...this.props.projects].map(pro => {
+            if (pro.archived){
+                debugger
+                return {
+                    title: `${pro.title} Task List`,
+                    start: pro.date,
+                    end: pro.date,
+                    backgroundColor: 'green'
+                }
+
+            } else {
+                return {
+                    title: `${pro.title} Task List`,
+                    start: pro.date,
+                    end: pro.date,
+                    backgroundColor: this.state[`${pro.title.toLowerCase()}Color`]
+                }
+            }
         })
-        )
     }
 
     dateClickHandler = (info) => {
