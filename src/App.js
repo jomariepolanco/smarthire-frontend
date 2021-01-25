@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { startUserSession } from './Redux/users/actions';
 import Signup from './Layout/Signup';
 import { getProjects } from './Redux/projects/actions';
+import { createApplication } from './Redux/applications/actions';
 
 
 class App extends React.Component{
@@ -76,4 +77,5 @@ const mdp = (dispatch) => {
     getProjects: (userId) => dispatch(getProjects(userId))
   }
 }
+
 export default connect(msp, mdp)(App);

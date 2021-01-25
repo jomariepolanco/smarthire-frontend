@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import ApplicationContainer from '../Containers/ApplicationContainer'
 
 
@@ -9,6 +10,7 @@ export default class JobCard extends Component {
         console.log(job)
         return (
             <div>
+                <NavLink to={`/clients/${job.companyId}`}>Back</NavLink>
                 <h1>{job.title}</h1>
                 <h4>{job.description}</h4>
                 <h5>${job.pay}.00/hour</h5>

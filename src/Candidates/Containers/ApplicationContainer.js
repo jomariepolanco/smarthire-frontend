@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import App from '../../App';
+import CreateApplicationForm from '../Components/CreateApplicationForm'
 
-export default class ApplicationContainer extends Component {
+class ApplicationContainer extends Component {
 
     renderApplications = () => {
-        return [...this.props.applications].map(app => {
+        return [...this.props.candidate.applications].map(app => {
+            console.log(app)
             let color;
             if (app.green){
                 color = '#62c370'
@@ -13,17 +18,29 @@ export default class ApplicationContainer extends Component {
                 color = '#ff5964'
             }
             return(
-                <h3 style={{color: color}}>{app.openJob}</h3>
+                <>
+                <NavLink to={`/clients/${app.companyId}/jobs/${app.openJobId}`} style={{color: color}}>{app.openJob}</NavLink>
+                <br />
+                </>
             )
         })
     }
+
     render() {
-        console.log(this.props.applications)
         return (
             <div>
+                <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.props.submitHandler}/>
                 <h1>Applications</h1>
                 {this.renderApplications()}
             </div>
         )
     }
 }
+
+const msp = (state) => {
+    return {
+        candidates: state.candidates
+    }
+}
+
+export default connect(msp)(ApplicationContainer);

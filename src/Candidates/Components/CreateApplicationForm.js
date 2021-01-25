@@ -57,7 +57,6 @@ export default class CreateApplicationForm extends Component {
     }
 
     render() {
-        console.log(this.props.jobs)
         return (
             <div>
                 <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="blue">Create Application</Button>}>

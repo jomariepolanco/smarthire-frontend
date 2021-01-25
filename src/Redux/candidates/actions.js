@@ -1,4 +1,5 @@
-import { CREATE_NEW_CALL, CREATE_NEW_CANDIDATE, GET_ALL_CANDIDATES, UPDATE_CANDIDATE} from "./actionTypes"
+import { CREATE_APPLICATION_FOR_JOB } from "../jobs/actionTypes"
+import { CREATE_APPLICATION_FOR_CANDY, CREATE_NEW_CALL, CREATE_NEW_CANDIDATE, GET_ALL_CANDIDATES, UPDATE_CANDIDATE} from "./actionTypes"
 
 export function getCandidates(){
     const token = localStorage.getItem('token')
@@ -64,5 +65,24 @@ export function createCandidateCall(newCallObj){
         })
         .then(r => r.json())
         .then(newCall => dispatch({type: CREATE_NEW_CALL, payload: newCall}))
+    }
+}
+
+export function createApplication(appObj){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch('http://localhost:3000/api/v1/job_applications', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(appObj)
+        })
+        .then(r => r.json())
+        .then(newApp => {
+            dispatch({type: CREATE_APPLICATION_FOR_CANDY, payload: newApp})
+            dispatch({type: CREATE_APPLICATION_FOR_JOB, payload: newApp})
+        })
     }
 }

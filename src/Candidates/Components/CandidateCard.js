@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Segment } from 'semantic-ui-react'
-import { createApplication } from '../../Redux/applications/actions'
+import { createApplication } from '../../Redux/candidates/actions'
 import FormInput from '../../sharedComponents/Form'
 import ApplicationContainer from '../Containers/ApplicationContainer'
 import CallContainer from '../Containers/CallContainer'
-import CreateApplicationForm from './CreateApplicationForm'
 import NotesCard from './NotesCard'
 
 
@@ -23,6 +22,7 @@ class CandidateCard extends Component {
         zipcode: this.props.candidate.zipcode
     }
 
+
     changeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -31,11 +31,9 @@ class CandidateCard extends Component {
         this.props.updateCandidate(this.props.candidate.id, updatedObj)
     }
 
-    createAppSubmitHandler = (newAppObj) => {
-        this.props.createApplication(newAppObj)
-    }
 
     render() {
+        debugger
         console.log(this.props.candidate)
         return (
             <>
@@ -71,8 +69,8 @@ class CandidateCard extends Component {
                             <NotesCard candidate={this.props.candidate} notes={this.props.candidate.notes}/>
                         </Segment>
                         <Segment>
-                            <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.createAppSubmitHandler}/>
-                            <ApplicationContainer applications={this.props.candidate.applications}/>
+                            {/* <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.props.createAppSubmitHandler}/> */}
+                            <ApplicationContainer  candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.props.createAppSubmitHandler} />
                         </Segment>
                     </Grid.Column>
                 </Grid.Row>

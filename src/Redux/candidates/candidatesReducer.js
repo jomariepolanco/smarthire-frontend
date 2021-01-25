@@ -1,4 +1,4 @@
-import { CREATE_NEW_CALL, CREATE_NEW_CANDIDATE, GET_ALL_CANDIDATES, UPDATE_CANDIDATE } from "./actionTypes";
+import { CREATE_APPLICATION_FOR_CANDY, CREATE_NEW_CALL, CREATE_NEW_CANDIDATE, GET_ALL_CANDIDATES, UPDATE_CANDIDATE } from "./actionTypes";
 
 const defaultState = {
     candidates: []
@@ -20,6 +20,11 @@ export function candidatesReducer(state = defaultState.candidates, action){
             return newState
         case CREATE_NEW_CANDIDATE:
             return [...state, action.payload]
+        case CREATE_APPLICATION_FOR_CANDY:
+            let nState = [...state]
+            let i = nState.findIndex(candy => candy.id ===action.payload.candidateId)
+            nState[i].applications.push(action.payload)
+            return nState
         default: 
             return state
     }

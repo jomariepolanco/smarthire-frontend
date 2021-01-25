@@ -8,6 +8,7 @@ import CreateCandidateForm from '../Components/CreateCandidateForm'
 import SearchForm from '../../sharedComponents/SearchForm'
 import { getJobs } from '../../Redux/jobs/actions'
 import { Card } from 'semantic-ui-react'
+import { createApplication } from '../../Redux/candidates/actions'
 
 class CandidateContainer extends Component {
 
@@ -51,6 +52,9 @@ class CandidateContainer extends Component {
         this.props.updateCandidate(candyId, updateObj)
     }
 
+    createAppSubmitHandler = (newAppObj) => {
+        this.props.createApplication(newAppObj)
+      }
 
     render() {
         return (
@@ -61,7 +65,7 @@ class CandidateContainer extends Component {
                         let id = +match.params.id 
 
                         let candidate = [...this.props.candidates].find(candy => candy.id === id)
-                        return <CandidateCard candidate={candidate} updateCandidate={this.updateCandidateHandler} />
+                        return <CandidateCard candidate={candidate} updateCandidate={this.updateCandidateHandler} createAppSubmitHandler={this.createAppSubmitHandler} />
                     }} />
 
                     <Route path='/candidates' render={(routerProps) => {
@@ -100,7 +104,8 @@ class CandidateContainer extends Component {
 const msp = (state) => {
     return {
         candidates: state.candidates,
-        user: state.user
+        user: state.user,
+        applications: state.applications
     }
 }
 
@@ -108,7 +113,8 @@ const mdp = (dispatch) => {
     return {
         getCandidates: () => dispatch(getCandidates()),
         updateCandidate: (candidateId, updateObj) => dispatch(updateCandidate(candidateId, updateObj)),
-        getJobs: () => dispatch(getJobs())
+        getJobs: () => dispatch(getJobs()),
+        createApplication: (obj) => dispatch(createApplication(obj))
     }
 }
 
