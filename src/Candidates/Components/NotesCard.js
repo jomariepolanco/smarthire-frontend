@@ -6,11 +6,20 @@ import { updateCandidate } from '../../Redux/candidates/actions'
 class NotesCard extends Component {
 
     state = {
-        notes: this.props.notes
+        notes: this.props.notes,
+        focus: false
     }
 
     changeHandler = (e) => {
         this.setState({[e.target.name]: e.target.value})
+    }
+
+    focusHandler = () => {
+        this.setState({focus: true})
+    }
+
+    focusOutHandler = () => {
+        this.setState({focus: false})
     }
 
     submitHandler = (e) => {
@@ -19,13 +28,24 @@ class NotesCard extends Component {
     }
 
     render() {
+        console.log(this.state.focus)
         return (
             <div>
                 <h3>Notes</h3>
-                <Form size="huge" widths="equal" onSubmit={this.submitHandler}>
+
+                {this.state.focus ? 
+                
+                <Form onFocus={this.focusHandler} onBlur={this.focusOutHandler} widths="equal" onSubmit={this.submitHandler}>
                     <Form.TextArea control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
                     <Button color="blue">Update Note</Button>
                 </Form>
+            
+                :
+            
+                <p onClick={this.focusHandler}>{this.props.notes}</p>
+            
+                }
+                
                 
             </div>
         )

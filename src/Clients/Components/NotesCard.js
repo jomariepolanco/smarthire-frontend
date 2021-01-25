@@ -6,7 +6,16 @@ import {updateCompany} from '../../Redux/companies/actions'
 class NotesCard extends Component {
 
     state = {
-        notes: this.props.notes
+        notes: this.props.notes,
+        focus: false
+    }
+
+    focusHandler = () => {
+        this.setState({focus: true})
+    }
+
+    focusOutHandler = () => {
+        this.setState({focus: false})
     }
 
     changeHandler = (e) => {
@@ -19,13 +28,24 @@ class NotesCard extends Component {
     }
 
     render() {
+        console.log(this.state.focus)
         return (
             <div>
                 <h3>Notes</h3>
-                <Form size="huge" widths="equal" onSubmit={this.submitHandler}>
-                    <Form.TextArea control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
-                    <Button color="blue">Update Notes</Button>
-                </Form>
+
+                {this.state.focus ?  
+                    <Form onFocus={this.focusHandler} onBlur={this.focusOutHandler} size="huge" widths="equal" onSubmit={this.submitHandler}>
+                        <Form.TextArea control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
+                        <Button color="blue">Update Notes</Button>
+                    </Form>
+            
+                :
+            
+            
+                    <p onFocus={this.focusOutHandler} onClick={this.focusHandler}>{this.props.notes}</p>
+            
+            
+                }
             </div>
         )
     }
