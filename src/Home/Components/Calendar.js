@@ -38,25 +38,11 @@ class Calendar extends Component {
             this.props.createProject(candidateObj)
             this.props.createProject(clientObj)
         }
-
-
-        //color change for calendar
-        for (let pro in projects){
-            if (pro.tasks){
-                if (pro.title === 'Candidate' && pro.archived){
-                    this.setState({candidateColor: '#62c370'})
-                }
-                if (pro.title === 'Client' && pro.archived){
-                    this.setState({clientColor: '#62c730'})
-                }
-            }
-        }
     }
 
     calendarEvents = () => {
         return [...this.props.projects].map(pro => {
             if (pro.archived){
-                debugger
                 return {
                     title: `${pro.title} Task List`,
                     start: pro.date,

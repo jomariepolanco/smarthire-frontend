@@ -11,6 +11,7 @@ import Login from './Layout/Login';
 import { connect } from 'react-redux';
 import { startUserSession } from './Redux/users/actions';
 import Signup from './Layout/Signup';
+import { getProjects } from './Redux/projects/actions';
 
 
 class App extends React.Component{
@@ -20,6 +21,10 @@ class App extends React.Component{
     if (token){
       this.props.startUserSession()
     }
+  }
+
+  componentDidUpdate(){
+    this.props.getProjects(this.props.user.id)
   }
 
   render(){
@@ -67,7 +72,8 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
   return {
-    startUserSession: () => dispatch(startUserSession())
+    startUserSession: () => dispatch(startUserSession()),
+    getProjects: (userId) => dispatch(getProjects(userId))
   }
 }
 export default connect(msp, mdp)(App);
