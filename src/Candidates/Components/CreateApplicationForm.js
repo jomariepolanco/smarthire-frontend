@@ -12,8 +12,7 @@ export default class CreateApplicationForm extends Component {
     renderOptionTag = () => {
         let options = [];
         [...this.props.jobs].forEach(job => {
-            options.push({key: job.id, text: `${job.title}(Company Name here)`, value: job.id})
-                // <option key={job.id} value={job.id}>{job.title}(Company Name Goes Here)</option>
+            options.push({key: job.id, text: `${job.title} at ${job.company}`, value: job.id})
         })
 
         return options
@@ -58,7 +57,7 @@ export default class CreateApplicationForm extends Component {
     }
 
     render() {
-        console.log(this.state)
+        console.log(this.props.jobs)
         return (
             <div>
                 <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="blue">Create Application</Button>}>
