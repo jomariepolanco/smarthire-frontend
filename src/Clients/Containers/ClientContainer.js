@@ -74,7 +74,7 @@ class ClientContainer extends Component {
                     return (
                         <div>
                             <Segment basic>
-                                <SearchForm changeHandler={this.searchFormOnChange} searchValue={this.state.searchedCompanies}/>
+                                <SearchForm changeHandler={this.searchFormOnChange} searchValue={this.state.searchedCompanies} label="Search By Company Name or Industry"/>
                             </Segment>
                             <Segment basic>
                                 <ClientList clients={this.searchFormList()} />

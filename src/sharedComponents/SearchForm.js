@@ -14,7 +14,7 @@ export default class SearchForm extends Component {
         return (
             <div>
                 <Form>
-                    <Form.Field fluid control={Input} label="Search By Name" type="text" name="name" placeholder="Search By Name" value={this.props.searchValue} onChange={this.changeHandler} />
+                    <Form.Field fluid control={Input} label={this.props.label} type="text" name="name" placeholder="Search By Name" value={this.props.searchValue} onChange={this.changeHandler} />
                 </Form>
             </div>
         )
