@@ -19,9 +19,8 @@ class Calendar extends Component {
     componentDidMount(){
         const date = new Date()
         const today = `${date.getFullYear()}-${("0" + date.getMonth() + 1).slice(-2)}-${("0" + date.getDate()).slice(-2)}`
-
         const projects = [...this.props.projects].filter(project => project.date === today)
-        if (projects.length <= 0){
+        if (projects.length === 0){
             //create 2 projects - candidate and client for today if there are no projects
 
             //userId changed to logged in user once auth implemented
@@ -75,6 +74,7 @@ class Calendar extends Component {
     }
 
     render() {
+        console.log(this.props.projects)
         return (
             <>
             <Switch>
