@@ -53,6 +53,16 @@ class Calendar extends Component {
         }
     }
 
+    calendarEvents = () => {
+        return [...this.props.projects].map(pro => ({
+            title: `${pro.title} Task List`,
+            start: pro.date,
+            end: pro.date,
+            backgroundColor: this.state[`${pro.title.toLowerCase()}Color`]
+        })
+        )
+    }
+
     dateClickHandler = (info) => {
         const projects = [...this.props.projects].filter(project => project.date === info.dateStr)
         //get tasks for above projects
@@ -89,8 +99,7 @@ class Calendar extends Component {
                 <Route path='/home' render={() => {
                     return (
                         <div>
-                            <FullCalendar plugins={[dayGridPlugin, interactionPlugin]}  dateClick={this.dateClickHandler} events={[{daysOfWeek: [1,2,3,4,5], title: 'Candidate Task List', backgroundColor: this.state.candidateColor
-                        }, {daysOfWeek: [1,2,3,4,5], title: 'Client Task List', backgroundColor: this.state.clientColor}]}  />
+                            <FullCalendar plugins={[dayGridPlugin, interactionPlugin]}  dateClick={this.dateClickHandler} events={this.calendarEvents()}  />
                         </div>
                     )
                 }} />
@@ -100,6 +109,8 @@ class Calendar extends Component {
     }
 }
 
+// events={[{daysOfWeek: [1,2,3,4,5], title: 'Candidate Task List', backgroundColor: this.state.candidateColor
+//                         }, {daysOfWeek: [1,2,3,4,5], title: 'Client Task List', backgroundColor: this.state.clientColor}]
 
 
 
