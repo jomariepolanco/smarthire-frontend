@@ -1,3 +1,7 @@
 /*******************************
     User Variable Overrides
 *******************************/
+@primaryColor: #1B9AAA;
+@secondaryColor: #FF5964;
+@green: #62C370;
+@yellow: #E6C229;

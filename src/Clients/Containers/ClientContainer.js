@@ -8,14 +8,14 @@ import CompanyCard from '../Components/CompanyCard';
 import CreateClientForm from '../Components/CreateClientForm';
 import JobCard from '../../Jobs/Components/JobCard';
 import { getJobs } from '../../Redux/jobs/actions';
-import { Card } from 'semantic-ui-react';
+import { Card, Segment } from 'semantic-ui-react';
 import IndustrySearchForm from '../Components/IndustrySearchForm';
 
 
 class ClientContainer extends Component {
 
     state = {
-        searchedCompanies: []
+        searchedCompanies: ''
     }
 
     componentDidMount(){
@@ -23,9 +23,19 @@ class ClientContainer extends Component {
         this.props.getJobs()
     }
 
-    searchFormSubmit = (name) => {
-        const searchedCompanies = [...this.props.companies].filter(co => co.name.toLowerCase().includes(name.toLowerCase()))
-        this.setState({searchedCompanies: searchedCompanies})
+    searchFormList = () => {
+        const searchedCompanies = [...this.props.companies].filter(co => co.name.toLowerCase().includes(this.state.searchedCompanies.toLowerCase()) || co.industry.toLowerCase().includes(this.state.searchedCompanies.toLowerCase()))
+
+        if (this.state.searchedCompanies === '') {
+            return null
+        } else {
+            return searchedCompanies
+        }
+
+    }
+
+    searchFormOnChange = (value) => {
+        this.setState({searchedCompanies: value})
     }
 
     industryFormSubmit = (industry) => {
@@ -63,18 +73,15 @@ class ClientContainer extends Component {
                 <Route path='/clients' render={(routerProps) => {
                     return (
                         <div>
-                            <Card fluid>
-                                <SearchForm submitHandler={this.searchFormSubmit}/>
-                            </Card>
-                            <Card fluid>
-                                <IndustrySearchForm submitHandler={this.industryFormSubmit}/>
-                            </Card>
-                            <Card fluid>
-                                <ClientList clients={this.state.searchedCompanies} />
-                            </Card>
-                            <Card fluid>
+                            <Segment basic>
+                                <SearchForm changeHandler={this.searchFormOnChange} searchValue={this.state.searchedCompanies}/>
+                            </Segment>
+                            <Segment basic>
+                                <ClientList clients={this.searchFormList()} />
+                            </Segment>
+                            <Segment basic>
                                 <CreateClientForm history={routerProps.history} />
-                            </Card>
+                            </Segment>
                         </div>
 
                     )

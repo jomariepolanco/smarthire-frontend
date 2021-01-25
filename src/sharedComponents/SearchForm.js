@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Input } from 'semantic-ui-react'
+import { Form, Input } from 'semantic-ui-react'
 
 export default class SearchForm extends Component {
     state = {
@@ -7,20 +7,14 @@ export default class SearchForm extends Component {
     }
 
     changeHandler = (e) => {
-        this.setState({[e.target.name]: e.target.value})
-    }
-
-    submitHandler = (e) => {
-        e.preventDefault()
-        this.props.submitHandler(this.state.name)
+        this.props.changeHandler(e.target.value)
     }
 
     render() {
         return (
             <div>
-                <Form onSubmit={this.submitHandler}>
-                    <Form.Field control={Input} label="Search By Name" type="text" name="name" placeholder="Search By Name" value={this.state.name} onChange={this.changeHandler} />
-                    <Button color='blue'>Submit</Button>
+                <Form>
+                    <Form.Field fluid control={Input} label="Search By Name" type="text" name="name" placeholder="Search By Name" value={this.props.searchValue} onChange={this.changeHandler} />
                 </Form>
             </div>
         )

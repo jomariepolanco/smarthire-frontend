@@ -12,8 +12,8 @@ import styled from 'styled-components'
 class Calendar extends Component {
 
     state = {
-        candidateColor: 'orange',
-        clientColor: 'blue'
+        candidateColor: '#ff5964',
+        clientColor: '#1b9aaa'
     }
 
     componentDidMount(){
@@ -45,10 +45,10 @@ class Calendar extends Component {
         for (let pro in projects){
             if (pro.tasks){
                 if (pro.title === 'Candidate' && pro.tasks.every(task => task.archived)){
-                    this.setState({candidateColor: 'green'})
+                    this.setState({candidateColor: '#62c370'})
                 }
                 if (pro.title === 'Client' && pro.tasks.every(task => task.archived)){
-                    this.setState({clientColor: 'green'})
+                    this.setState({clientColor: '#62c730'})
                 }
             }
         }
@@ -57,17 +57,21 @@ class Calendar extends Component {
     dateClickHandler = (info) => {
         const projects = [...this.props.projects].filter(project => project.date === info.dateStr)
         //get tasks for above projects
-        const projectOneId = projects[0].id
-        const projectTwoId = projects[1].id
-        this.props.getProjectsTasks(projectOneId, projectTwoId)
-        
-        if (projects.length <=0 && info.date < new Date()){
-            alert("This date already passed")
-        } else if (projects.length <=0 && info.date > new Date()) {
-            alert("You're looking too far ahead!")
-        } else {
-            this.props.history.push(`/home/projects/${info.dateStr}`)
+        let projectOneId;
+        let projectTwoId;
+        if (projects.length > 0){
+            projectOneId = projects[0].id
+            projectTwoId = projects[1].id
+            this.props.getProjectsTasks(projectOneId, projectTwoId)
         }
+            
+            if (projects.length <=0 && info.date < new Date()){
+                alert("This date already passed")
+            } else if (projects.length <=0 && info.date > new Date()) {
+                alert("You're looking too far ahead!")
+            } else {
+                this.props.history.push(`/home/projects/${info.dateStr}`)
+            }
     }
 
     render() {

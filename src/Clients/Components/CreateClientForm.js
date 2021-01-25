@@ -37,7 +37,7 @@ class CreateClientForm extends Component {
         return (
             <div>
                 <h1>Add a Client</h1>
-                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} trigger={<Button color='green'>Add Client</Button>}>
+                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} trigger={<Button primary>Add Client</Button>}>
                     <Modal.Content>
                         <Form onSubmit={this.submitHandler}>
                             <Form.Field control={Input} label="Name" type="text" name="name" value={this.state.name} onChange={this.changeHandler} placeholder="Name"/>

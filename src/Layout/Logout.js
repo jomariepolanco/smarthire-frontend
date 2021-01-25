@@ -14,7 +14,7 @@ class Logout extends Component {
     render() {
         return (
             <div>
-                <Button negative onClick={this.handleClick}>Log Out</Button>
+                <Button secondary onClick={this.handleClick}>Log Out</Button>
             </div>
         )
     }

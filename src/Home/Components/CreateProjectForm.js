@@ -63,6 +63,7 @@ class CreateProjectForm extends Component {
     }
 
     render() {
+        console.log(this.state.taskNumber)
         return (
             <div>
                 <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color='green'>Create A Project</Button>}>

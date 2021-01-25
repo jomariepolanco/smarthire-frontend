@@ -13,7 +13,7 @@ import ApplicationSearchForm from '../Components/ApplicationSearchForm'
 class CandidateContainer extends Component {
 
     state = {
-        searchedCandies: []
+        searchedCandies: '',
     }
 
     componentDidMount(){
@@ -21,23 +21,38 @@ class CandidateContainer extends Component {
         this.props.getJobs()
     }
 
-    searchFormSubmit = (name) => {
-        const searchedCandies = [...this.props.candidates].filter(candy => candy.firstName.toLowerCase().includes(name.toLowerCase()) || candy.lastName.toLowerCase().includes(name.toLowerCase()))
-        this.setState({searchedCandies: searchedCandies})
+    searchFormOnChange = (value) => {
+        this.setState({searchedCandies: value})
     }
 
-    appSearchHandler = (color) => {
-        const searched = [...this.props.candidates].filter(candy => {
-            if (color.toLowerCase() === 'green'){
-                return candy.applications.some(app => app.green)
-            } else if (color.toLowerCase() === 'yellow'){
-                return candy.applications.some(app => app.yellow)
-            } else if (color.toLowerCase() === 'red'){
-                return candy.applications.some(app => app.red)
-            }
-        })
-        this.setState({searchedCandies: searched})
+    renderCandyList = () => {
+        let searchedCandies;
+        if (this.state.searchedCandies.includes('green') || this.state.searchedCandies.includes('red') || this.state.searchedCandies.includes('yellow')){
+            searchedCandies = [...this.props.candidates].filter(candy => {
+                if (this.state.searchedCandies.toLowerCase() === 'green'){
+                    return candy.applications.some(app => app.green)
+                } else if (this.state.searchedCandies.toLowerCase() === 'yellow'){
+                    return candy.applications.some(app => app.yellow)
+                } else if (this.state.searchedCandies.toLowerCase() === 'red'){
+                    return candy.applications.some(app => app.red)
+                }
+            })
+        } else {
+            searchedCandies = [...this.props.candidates].filter(candy => candy.firstName.toLowerCase().includes(this.state.searchedCandies.toLowerCase()) || candy.lastName.toLowerCase().includes(this.state.searchedCandies.toLowerCase()))
         }
+
+        if (this.state.searchedCandies === ''){
+            return null
+        } else {
+            return searchedCandies
+        }
+    }
+
+    // appSearchHandler = (color) => {
+        
+    //     debugger
+    //     this.setState({searched: searched})
+    //     }
 
     updateCandidateHandler = (candyId, updateObj) => {
         this.props.updateCandidate(candyId, updateObj)
@@ -60,13 +75,14 @@ class CandidateContainer extends Component {
                         return (
                             <div>
                                 <Card fluid>
-                                    <SearchForm  submitHandler={this.searchFormSubmit}/>
+                                    <SearchForm 
+                                    changeHandler={this.searchFormOnChange} searchValue={this.state.searchedCandies}/>
                                 </Card>
                                 <Card fluid>
-                                    <ApplicationSearchForm submitHandler={this.appSearchHandler}/>
+                                    <ApplicationSearchForm changeHandler={this.searchFormOnChange} searchValue={this.state.searchedCandies} />
                                 </Card>
                                 <Card fluid>
-                                    <CandidateList candidates={this.state.searchedCandies} />
+                                    <CandidateList candidates={this.renderCandyList()} />
                                 </Card>
                                 <Card fluid>
                                     <CreateCandidateForm history={routerProps.history} />

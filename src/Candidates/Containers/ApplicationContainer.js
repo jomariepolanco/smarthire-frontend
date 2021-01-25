@@ -6,11 +6,11 @@ export default class ApplicationContainer extends Component {
         return [...this.props.applications].map(app => {
             let color;
             if (app.green){
-                color = 'green'
+                color = '#62c370'
             } else if (app.yellow){
-                color = 'yellow'
+                color = '#e6c229'
             } else if (app.red) {
-                color = 'red'
+                color = '#ff5964'
             }
             return(
                 <h3 style={{color: color}}>{app.openJob}</h3>

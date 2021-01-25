@@ -21,7 +21,7 @@ export default class IndustrySearchForm extends Component {
             <div>
                 <Form onSubmit={this.submitHandler}>
                     <Form.Field control={Input} label="Search By Industry" placeholder="Search By Industry" type="text" name="industry" value={this.state.industry} onChange={this.changeHandler} />
-                    <Button color='blue'>Submit</Button>
+                    <Button primary>Submit</Button>
                 </Form>
             </div>
         )

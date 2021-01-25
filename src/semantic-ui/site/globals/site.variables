@@ -7,3 +7,8 @@
 @pageFont: 'Fira Sans Condensed', sans-serif;
 @headerFont: 'Fira Sans Condensed', sans-serif;
 @googleFontFamily: 'Fira Sans Condensed', sans-serif;
+
+@red: #ff5964;
+@blue: #1b9aaa;
+@yellow: #E6C229;
+@green: #62C370;

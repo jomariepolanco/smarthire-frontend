@@ -50,7 +50,7 @@ export default class CreateApplicationForm extends Component {
                 open_job_id: +this.state.job,
                 red: false, 
                 yellow: true,
-                green: true
+                green: false
             }
         }
         this.props.submitHandler(newApp)
