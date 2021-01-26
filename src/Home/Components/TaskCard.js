@@ -29,7 +29,7 @@ class TaskCard extends Component {
             <List.Item>
                 <List.Content>
                     <Transition animation={this.state.animation} duration={this.state.duration} visible={this.state.visible}>
-                        <Checkbox disabled={this.props.task.archived} onClick={this.clickHandler} checked={this.props.task.archived} value={this.props.task.id} label={this.props.task.content}/>
+                        <Checkbox disabled={this.props.task.archived} onClick={this.clickHandler} checked={this.props.task.archived} value={this.props.task.id} label={this.props.task.content} />
                     </Transition>
                 </List.Content>
             </List.Item>

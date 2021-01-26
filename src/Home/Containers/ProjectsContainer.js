@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import ProjectCard from '../Components/ProjectCard'
-import {Accordion, Card, Grid, Icon, Item} from 'semantic-ui-react'
+import {Accordion, Card, Grid, Header, Icon, Item} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {createTask} from '../../Redux/tasks/actions'
 import CreateProjectForm from '../Components/CreateProjectForm'
 import { updateProject } from '../../Redux/projects/actions'
+import DayJS from 'react-dayjs'
 
 class ProjectsContainer extends Component {
 
     state = {
-        activeIndex: 0
+        activeIndex: -1
     }
 
     componentDidMount(){
@@ -84,8 +85,12 @@ class ProjectsContainer extends Component {
     render() {
         return (
             <div>
+                <Header as='h2' floated='left'>
+                    <DayJS format='MMMM D, YYYY'>{this.props.projects[0].date}</DayJS>
+                </Header>
                 <CreateProjectForm />
-                <h1>{this.props.projects[0].date.slice(5)}-{this.props.projects[0].date.slice(0,4)}</h1>
+                <br /><br /><br />
+            
                 <Accordion styled fluid>
                     {this.renderProjects()}
                 </Accordion>

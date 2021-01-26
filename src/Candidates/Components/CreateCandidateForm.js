@@ -33,17 +33,17 @@ class CreateCandidateForm extends Component {
             address: this.state.address,
             city: this.state.city,
             state: this.state.state,
-            zipcode: this.state.zipcode
+            zipcode: this.state.zipcode,
+            notes: 'Write Note Here'
         }
+        //push to candidates show page when hit submit
         this.props.createNewCandidate(newCandy, this.props.history)
         this.setState({open: false})
-        //push to candidates show page when hit submit
     }
 
     render() {
         return (
             <div>
-                <h1>Add a Candidate</h1>
                 <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})}
                 trigger={<Button color='green'>Add Candidate</Button>}>
                     <Modal.Content>

@@ -12,7 +12,7 @@ export default class CandidateList extends Component {
                     <List.Item>
                         <List.Content>
                             <NavLink to={`/candidates/${candy.id}`} key={candy.id}>
-                                <h4 >{candy.firstName} {candy.lastName}</h4>
+                                <h4 style={{color: '#1b9aaa'}}>{candy.firstName} {candy.lastName}</h4>
                             </NavLink>
                         </List.Content>
                     </List.Item>

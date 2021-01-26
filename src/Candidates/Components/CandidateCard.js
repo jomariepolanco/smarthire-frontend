@@ -37,11 +37,11 @@ class CandidateCard extends Component {
         return (
             <>
                 <h1>{this.props.candidate.firstName} {this.props.candidate.lastName}</h1>
-            <Grid columns={2} divided>
+            <Grid columns={2}>
                 <Grid.Row stretched>
                     <Grid.Column>
-                        <Segment>
-                            <FormInput value={this.state.first_name} name="first_name" changeHandler={this.changeHandler} placeholder="First Name" submitHandler={this.submitHandler}/>
+                        <Segment raised>
+                            <FormInput color value={this.state.first_name} name="first_name" changeHandler={this.changeHandler} placeholder="First Name" submitHandler={this.submitHandler}/>
                 
                             <FormInput value={this.state.last_name} name="last_name" changeHandler={this.changeHandler} placeholder="Last Name" submitHandler={this.submitHandler} />
                         
@@ -59,15 +59,15 @@ class CandidateCard extends Component {
                         
                             <FormInput value={this.state.zipcode} name="zipcode" changeHandler={this.changeHandler} placeholder="Zipcode" submitHandler={this.submitHandler}/>
                         </Segment>
-                        <Segment>
+                        <Segment raised>
                             <CallContainer target={this.props.candidate} calls={this.props.candidate.calls}/>
                         </Segment>
                     </Grid.Column>
                     <Grid.Column>
-                        <Segment>
+                        <Segment raised>
                             <NotesCard candidate={this.props.candidate} notes={this.props.candidate.notes}/>
                         </Segment>
-                        <Segment>
+                        <Segment raised>
                             {/* <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.props.createAppSubmitHandler}/> */}
                             <ApplicationContainer  candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.props.createAppSubmitHandler} />
                         </Segment>

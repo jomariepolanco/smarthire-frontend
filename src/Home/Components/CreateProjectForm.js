@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, Form, Icon, Input, Modal, Transition } from 'semantic-ui-react'
+import { Button, Form, Header, Icon, Input, Modal, Transition } from 'semantic-ui-react'
 import { createProject } from '../../Redux/projects/actions'
 import { createTask } from '../../Redux/tasks/actions'
 
@@ -59,6 +59,8 @@ class CreateProjectForm extends Component {
         console.log(this.state.taskNumber)
         return (
             <div>
+                <Header floated='right'>
+
                 <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color='green'>Create A Project</Button>}>
                     <Modal.Content>
                         <Form onSubmit={this.submitHandler}>
@@ -80,6 +82,7 @@ class CreateProjectForm extends Component {
                     </Modal.Content>
                 </Modal>
                 <br />
+                </Header>
             </div>
         )
     }
