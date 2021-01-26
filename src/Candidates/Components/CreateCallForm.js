@@ -45,7 +45,7 @@ class CreateCallForm extends Component {
 
                             <Form.Field control={Input} label="Candidate" type="text" placeholder={this.props.target.firstName + ' ' + this.props.target.lastName} disabled />
 
-                            <Button color='green'>Log</Button>
+                            <Button color='green'>Add Call</Button>
                         </Form>
                     </Modal.Content>
 
