@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import App from '../../App';
 import CreateApplicationForm from '../Components/CreateApplicationForm'
 
 class ApplicationContainer extends Component {
@@ -37,10 +35,6 @@ class ApplicationContainer extends Component {
     }
 }
 
-const msp = (state) => {
-    return {
-        candidates: state.candidates
-    }
-}
 
-export default connect(msp)(ApplicationContainer);
+
+export default ApplicationContainer;

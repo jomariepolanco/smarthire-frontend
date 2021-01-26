@@ -33,8 +33,7 @@ class CandidateCard extends Component {
 
 
     render() {
-        debugger
-        console.log(this.props.candidate)
+        console.log(this.props)
         return (
             <>
                 <h1>{this.props.candidate.firstName} {this.props.candidate.lastName}</h1>

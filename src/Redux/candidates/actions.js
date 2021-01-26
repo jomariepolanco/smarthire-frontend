@@ -81,6 +81,7 @@ export function createApplication(appObj){
         })
         .then(r => r.json())
         .then(newApp => {
+            // debugger
             dispatch({type: CREATE_APPLICATION_FOR_CANDY, payload: newApp})
             dispatch({type: CREATE_APPLICATION_FOR_JOB, payload: newApp})
         })

@@ -23,6 +23,7 @@ export function candidatesReducer(state = defaultState.candidates, action){
         case CREATE_APPLICATION_FOR_CANDY:
             let nState = [...state]
             let i = nState.findIndex(candy => candy.id ===action.payload.candidateId)
+            // debugger
             nState[i].applications.push(action.payload)
             return nState
         default: 

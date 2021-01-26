@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { applicationsReducer } from './applications/applicationsReducer'
+// import { applicationsReducer } from './applications/applicationsReducer'
 import { candidatesReducer } from './candidates/candidatesReducer'
 import { companiesReducer } from './companies/clientsReducer'
 import { jobsReducer } from './jobs/jobsReducer'
@@ -13,6 +13,6 @@ export const rootReducer = combineReducers({
     candidates: candidatesReducer,
     companies: companiesReducer,
     jobs: jobsReducer,
-    applications: applicationsReducer,
+    // applications: applicationsReducer,
     user: usersReducer
 })

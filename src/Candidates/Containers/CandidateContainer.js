@@ -53,6 +53,7 @@ class CandidateContainer extends Component {
     }
 
     createAppSubmitHandler = (newAppObj) => {
+        // debugger
         this.props.createApplication(newAppObj)
       }
 
