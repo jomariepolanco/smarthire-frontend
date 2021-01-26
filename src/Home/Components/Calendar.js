@@ -91,7 +91,7 @@ class Calendar extends Component {
                     
                     let projects = [...this.props.projects].filter(project => project.date === projectDate)
 
-                   return <ProjectsContainer candidates={this.props.candidates} companies={this.props.companies} projects={projects} />
+                   return <ProjectsContainer  projects={projects} />
                 }
                 } />
                 <Route path='/home' render={() => {

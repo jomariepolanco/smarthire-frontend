@@ -12,53 +12,42 @@ class ProjectsContainer extends Component {
         const candidate = [...this.props.projects].find(pro => pro.title === "Candidate")
 
         const client = [...this.props.projects].find(pro => pro.title === "Client")
-
+        
         const tasks = [...this.props.tasks].filter(task => task.projectId === candidate.id || task.projectId === client.id)
-        if (tasks.length <= 0){
-          //find last candidate call
-          let lastCandiesCall = [...this.props.candidates].map(candy => [new Date(Math.max(...candy.calls.map(e => new Date(e.date)))), candy.id])
-            
-          lastCandiesCall.forEach(call => {
-              if (((new Date().getTime() - call[0].getTime()) / (1000 * 3600 * 24)) >= 60){
-                  //create task
-                  const candyTaskObj = {
-                      archived: false,
-                      date: new Date().toDateString(),
-                      project_id: candidate.id,
-                      content: `Call ${this.props.candidates.find(candy => candy.id === call[1]).firstName + ' ' + this.props.candidates.find(candy => candy.id === call[1]).lastName} for 60+ day check`
-                  }
-                  this.props.createTask(candyTaskObj)
-              }
-          })
-            //find last client call
-            let lastClientsCall = [...this.props.companies].map(co => [new Date(Math.max(...co.calls.map(e => new Date(e.date)))), co.id])
-
-            lastClientsCall.forEach(call => {
-                if (((new Date().getTime() - call[0].getTime()) / (1000 * 3600 * 24)) >= 60){
-                    const coTaskObj = {
-                        archived: false,
-                        date: new Date().toDateString(),
-                        project_id: client.id,
-                        content: `Call ${this.props.companies.find(co => co.id === call[1]).name} for 60+ day check`
-                    }
-                    this.props.createTask(coTaskObj)
+        
+        //find last candidate call
+        let lastCandiesCall = [...this.props.candidates].map(candy => [new Date(Math.max(...candy.calls.map(e => new Date(e.date)))), candy.id])
+        
+        lastCandiesCall.forEach(call => {
+            if (((new Date().getTime() - call[0].getTime()) / (1000 * 3600 * 24)) >= 30){
+                //create task
+                const candyTaskObj = {
+                    archived: false,
+                    date: new Date().toDateString(),
+                    project_id: candidate.id,
+                    content: `Call ${this.props.candidates.find(candy => candy.id === call[1]).firstName + ' ' + this.props.candidates.find(candy => candy.id === call[1]).lastName} for 30+ day check`
                 }
-            })
-        }
+                this.props.createTask(candyTaskObj)
+            }
+        })
+        
+        //find last client call
+        let lastClientsCall = [...this.props.companies].map(co => [new Date(Math.max(...co.calls.map(e => new Date(e.date)))), co.id])
+        
+        lastClientsCall.forEach(call => {
+            if (((new Date().getTime() - call[0].getTime()) / (1000 * 3600 * 24)) >= 30){
+                const coTaskObj = {
+                    archived: false,
+                    date: new Date().toDateString(),
+                    project_id: client.id,
+                    content: `Call ${this.props.companies.find(co => co.id === call[1]).name} for 30+ day check`
+                }
+                this.props.createTask(coTaskObj)
+            }
+        })
     }
 
-    // clickHandler = (e, data) => {
-    //     const projectId = data.value 
-    //     const pro = [...this.props.projects].find(pro => pro.id === projectId)
-    //     let updateObj;
-    //     if (pro.archived){
-    //         updateObj = {archived: false}
-    //     } else {
-    //         updateObj = {archived: true}
-    //     }
-
-    //     this.props.updateProject(projectId, updateObj)
-    // }
+    
 
     renderProjects = () => {
         return [...this.props.projects].map(project => {
@@ -83,7 +72,6 @@ class ProjectsContainer extends Component {
         })
     }
     render() {
-        console.log(this.props.tasks)
         return (
             <div>
                 <CreateProjectForm />
@@ -98,7 +86,9 @@ class ProjectsContainer extends Component {
 
 const msp = (state) => {
     return {
-        tasks: state.tasks
+        tasks: state.tasks,
+        candidates: state.candidates,
+        companies: state.companies
     }
 }
 

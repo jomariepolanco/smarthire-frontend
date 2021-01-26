@@ -21,7 +21,6 @@ class Login extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div>
                 <h1 style={{textAlign: 'center'}}>HireSmart</h1>
