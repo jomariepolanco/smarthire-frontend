@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, List } from 'semantic-ui-react'
 import TaskCard from './TaskCard'
 
 export default class ProjectCard extends Component {
 
     renderTasks = () => {
+        // debugger
         return [...this.props.tasks].map(task => <TaskCard key={task.id} task={task}/>)
     }
 
@@ -19,12 +20,14 @@ export default class ProjectCard extends Component {
     
     render() {
         return (
-            <Card.Description>
-                <Card.Header as='h4'>
+                <>
                     {this.percentageOfTasksDone()}
-                </Card.Header>
+                <List divided relaxed>
                     {this.renderTasks()}
-            </Card.Description>
+                </List>
+
+                </>
+           
         )
     }
 }

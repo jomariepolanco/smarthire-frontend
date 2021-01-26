@@ -67,19 +67,16 @@ class Calendar extends Component {
             for (let pro of projects){
                 this.props.getProjectsTasks(pro.id)
             }
-            // projectOneId = projects[0].id
-            // projectTwoId = projects[1].id
-            // this.props.getProjectsTasks(projectOneId)
-            // this.props.getProjectsTasks(projectTwoId)
         }
+
             
-            if (projects.length <=0 && info.date < new Date()){
-                alert("This date already passed")
-            } else if (projects.length <=0 && info.date > new Date()) {
-                alert("You're looking too far ahead!")
-            } else {
-                this.props.history.push(`/home/projects/${info.dateStr}`)
-            }
+        if (projects.length <=0 && info.date < new Date()){
+            alert("This date already passed")
+        } else if (projects.length <=0 && info.date > new Date()) {
+            alert("You're looking too far ahead!")
+        } else {
+            this.props.history.push(`/home/projects/${info.dateStr}`)
+        }
     }
 
     render() {
