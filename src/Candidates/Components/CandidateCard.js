@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Header, Segment } from 'semantic-ui-react'
 import { createApplication } from '../../Redux/candidates/actions'
 import FormInput from '../../sharedComponents/Form'
 import ApplicationContainer from '../Containers/ApplicationContainer'
@@ -41,6 +41,7 @@ class CandidateCard extends Component {
                 <Grid.Row stretched>
                     <Grid.Column>
                         <Segment raised>
+                            <Header as='h3'>Candidate Information</Header>
                             <FormInput color value={this.state.first_name} name="first_name" changeHandler={this.changeHandler} placeholder="First Name" submitHandler={this.submitHandler}/>
                 
                             <FormInput value={this.state.last_name} name="last_name" changeHandler={this.changeHandler} placeholder="Last Name" submitHandler={this.submitHandler} />

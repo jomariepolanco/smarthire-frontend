@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
+import { Header } from 'semantic-ui-react';
 import CreateApplicationForm from '../Components/CreateApplicationForm'
+import styled from 'styled-components'
 
 class ApplicationContainer extends Component {
 
@@ -17,8 +19,9 @@ class ApplicationContainer extends Component {
             }
             return(
                 <>
-                <NavLink to={`/clients/${app.companyId}/jobs/${app.openJobId}`} style={{color: color}}>{app.openJob}</NavLink>
-                <br />
+                <Header as='h4'>
+                    <NavLink to={`/clients/${app.companyId}/jobs/${app.openJobId}`} style={{color: color}}>{app.openJob}</NavLink>
+                </Header>
                 </>
             )
         })
@@ -27,13 +30,21 @@ class ApplicationContainer extends Component {
     render() {
         return (
             <div>
-                <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.props.submitHandler}/>
-                <h1>Applications</h1>
+                <Header as='h3'>Applications</Header>
                 {this.renderApplications()}
+                <ButtonPosition>
+                    <CreateApplicationForm candidate={this.props.candidate} jobs={this.props.jobs} submitHandler={this.props.submitHandler}/>
+                </ButtonPosition>
             </div>
         )
     }
 }
+
+const ButtonPosition = styled.div`
+    position: absolute;
+    left: 10;
+    bottom: 5%;
+`
 
 
 

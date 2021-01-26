@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Table } from 'semantic-ui-react'
+import { Header, List, Table } from 'semantic-ui-react'
 import CallCard from '../Components/CallCard'
 import CreateCallForm from '../Components/CreateCallForm'
 
@@ -19,7 +19,7 @@ export default class CallContainer extends Component {
         console.log(this.props.calls)
         return (
             <div>
-                <h3>Calls</h3>
+                <Header as='h3'>Calls</Header>
                 <Table basic='very' celled>
                     <Table.Header>
                         <Table.Row>

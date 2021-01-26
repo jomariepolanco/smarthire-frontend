@@ -59,7 +59,7 @@ export default class CreateApplicationForm extends Component {
     render() {
         return (
             <div>
-                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="blue">Create Application</Button>}>
+                <Modal onClose={() => this.setState({open: false})} onOpen={() => this.setState({open: true})} open={this.state.open} trigger={<Button color="green">Create Application</Button>}>
                     <Modal.Content>
                         <Form onSubmit={this.submitHandler}>
                             <Form.Field control={Input} label="Candidate" type="text" disabled value={this.props.candidate.name} /> 
