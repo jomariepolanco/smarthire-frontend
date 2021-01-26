@@ -1,4 +1,4 @@
-import { GET_USER_PROJECTS, CREATE_PROJECT_FOR_DATE } from "./actionTypes"
+import { GET_USER_PROJECTS, CREATE_PROJECT_FOR_DATE, UPDATE_PROJECT } from "./actionTypes"
 
 export function getProjects(userId){
     const token = localStorage.getItem('token')
@@ -30,5 +30,21 @@ export function createProject(newObj){
         })
         .then(r => r.json())
         .then(newProject => dispatch({type: CREATE_PROJECT_FOR_DATE, payload: newProject}))
+    }
+}
+
+export function updateProject(projectId, updateObj){
+    const token = localStorage.getItem('token')
+    return function(dispatch){
+        fetch(`http://localhost:3000/api/v1/projects/${projectId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(updateObj)
+        })
+        .then(r => r.json())
+        .then(updatedProject => dispatch({type: UPDATE_PROJECT, payload: updatedProject}))
     }
 }

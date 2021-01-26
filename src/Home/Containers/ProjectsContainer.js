@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import ProjectCard from '../Components/ProjectCard'
-import {Card, Grid, Item} from 'semantic-ui-react'
+import {Card, Checkbox, Grid, Item} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {createTask, getProjectsTasks} from '../../Redux/tasks/actions'
 import CreateProjectForm from '../Components/CreateProjectForm'
+import { updateProject } from '../../Redux/projects/actions'
 
 class ProjectsContainer extends Component {
 
@@ -46,6 +47,19 @@ class ProjectsContainer extends Component {
         }
     }
 
+    // clickHandler = (e, data) => {
+    //     const projectId = data.value 
+    //     const pro = [...this.props.projects].find(pro => pro.id === projectId)
+    //     let updateObj;
+    //     if (pro.archived){
+    //         updateObj = {archived: false}
+    //     } else {
+    //         updateObj = {archived: true}
+    //     }
+
+    //     this.props.updateProject(projectId, updateObj)
+    // }
+
     renderProjects = () => {
         return [...this.props.projects].map(project => {
             const tasks = [...this.props.tasks].filter(task => task.projectId === project.id)
@@ -55,6 +69,7 @@ class ProjectsContainer extends Component {
                     <Card centered fluid>
                 <Item>
                     <Card.Header as='h1' textAlign='center'>
+                        {/* <Checkbox onClick={this.clickHandler} checked={project.archived} value={project.id} /><span> </span> */}
                         {project.title}
                     </Card.Header>
                     <Card.Content>
@@ -68,10 +83,11 @@ class ProjectsContainer extends Component {
         })
     }
     render() {
-        console.log(this.props.tasks, this.props.projects)
+        console.log(this.props.projects)
         return (
             <div>
                 <CreateProjectForm />
+                <h1>{this.props.projects[0].date.slice(5)}-{this.props.projects[0].date.slice(0,4)}</h1>
                 <Grid divided='vertically'>
                     {this.renderProjects()}
                 </Grid>
@@ -82,13 +98,14 @@ class ProjectsContainer extends Component {
 
 const msp = (state) => {
     return {
-        tasks: state.tasks 
+        tasks: state.tasks
     }
 }
 
 const mdp = (dispatch) => {
     return {
-        createTask: (taskObj) => dispatch(createTask(taskObj))
+        createTask: (taskObj) => dispatch(createTask(taskObj)),
+        updateProject: (projectId, updateObj) => dispatch(updateProject(projectId, updateObj))
     }
 }
 

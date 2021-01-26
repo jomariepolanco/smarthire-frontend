@@ -41,7 +41,8 @@ class CreateProjectForm extends Component {
         const newObj = {
             title: this.state.title,
             user_id: this.props.user.id,
-            date: this.state.date
+            date: this.state.date,
+            archived: false
         }
 
         this.props.createProject(newObj)
