@@ -25,6 +25,7 @@ class NotesCard extends Component {
     submitHandler = (e) => {
         e.preventDefault()
         this.props.updateCompany(this.props.company.id, this.state)
+        this.focusOutHandler()
     }
 
     render() {
@@ -34,15 +35,15 @@ class NotesCard extends Component {
                 <h3>Notes</h3>
 
                 {this.state.focus ?  
-                    <Form onFocus={this.focusHandler} onBlur={this.focusOutHandler} size="huge" widths="equal" onSubmit={this.submitHandler}>
-                        <Form.TextArea control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
+                    <Form widths="equal" onSubmit={this.submitHandler}>
+                        <Form.TextArea rows="40" cols="40" onFocus={this.focusHandler} control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
                         <Button color="blue">Update Notes</Button>
                     </Form>
             
                 :
             
             
-                    <p onFocus={this.focusOutHandler} onClick={this.focusHandler}>{this.props.notes}</p>
+                    <div style={{whiteSpace: 'pre-line'}} onClick={this.focusHandler}>{this.props.notes}</div>
             
             
                 }
