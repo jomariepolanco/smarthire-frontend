@@ -7,7 +7,6 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {createProject, getProjects} from '../../Redux/projects/actions'
 import { getProjectsTasks } from '../../Redux/tasks/actions'
-import styled from 'styled-components'
 
 class Calendar extends Component {
 
@@ -84,7 +83,6 @@ class Calendar extends Component {
     }
 
     render() {
-        console.log(this.props.projects)
         return (
             <>
             <Switch>
@@ -109,8 +107,6 @@ class Calendar extends Component {
     }
 }
 
-// events={[{daysOfWeek: [1,2,3,4,5], title: 'Candidate Task List', backgroundColor: this.state.candidateColor
-//                         }, {daysOfWeek: [1,2,3,4,5], title: 'Client Task List', backgroundColor: this.state.clientColor}]
 
 
 

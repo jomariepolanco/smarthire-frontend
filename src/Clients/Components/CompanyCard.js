@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import CallContainer from '../Containers/CallContainer'
 import Form from '../../sharedComponents/Form'
 import NotesCard from './NotesCard'
-import { NavLink } from 'react-router-dom'
 import JobsContainer from '../../Jobs/Containers/JobsContainer'
 import { connect } from 'react-redux'
-import { createJob } from '../../Redux/companies/actions'
-import {getJobs} from '../../Redux/jobs/actions'
 import { Grid, Segment } from 'semantic-ui-react'
 
 
@@ -31,7 +28,6 @@ class CompanyCard extends Component {
     }
 
     render() {
-        console.log(this.props.company.jobs)
         return (
             <div>
                 <h1>{this.props.company.name}</h1>

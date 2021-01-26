@@ -8,8 +8,7 @@ import CompanyCard from '../Components/CompanyCard';
 import CreateClientForm from '../Components/CreateClientForm';
 import JobCard from '../../Jobs/Components/JobCard';
 import { getJobs } from '../../Redux/jobs/actions';
-import { Card, Segment } from 'semantic-ui-react';
-import IndustrySearchForm from '../Components/IndustrySearchForm';
+import { Segment } from 'semantic-ui-react';
 
 
 class ClientContainer extends Component {
@@ -52,7 +51,6 @@ class ClientContainer extends Component {
     }
 
     render() {
-        console.log(this.props.jobs)
         return (
             <>
             {this.props.user ?

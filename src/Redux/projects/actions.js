@@ -1,4 +1,3 @@
-import { CREATE_TASK } from "../tasks/actionTypes"
 import { GET_USER_PROJECTS, CREATE_PROJECT_FOR_DATE, UPDATE_PROJECT } from "./actionTypes"
 
 export function getProjects(userId){

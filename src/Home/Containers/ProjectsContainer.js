@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import ProjectCard from '../Components/ProjectCard'
-import {Card, Checkbox, Grid, Item} from 'semantic-ui-react'
+import {Card, Grid, Item} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import {createTask, getProjectsTasks} from '../../Redux/tasks/actions'
+import {createTask} from '../../Redux/tasks/actions'
 import CreateProjectForm from '../Components/CreateProjectForm'
 import { updateProject } from '../../Redux/projects/actions'
 
