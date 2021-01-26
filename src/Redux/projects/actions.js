@@ -1,3 +1,4 @@
+import { CREATE_TASK } from "../tasks/actionTypes"
 import { GET_USER_PROJECTS, CREATE_PROJECT_FOR_DATE, UPDATE_PROJECT } from "./actionTypes"
 
 export function getProjects(userId){
@@ -17,7 +18,7 @@ export function getProjects(userId){
     }
 }
 
-export function createProject(newObj){ 
+export function createProject(newObj, tasksArray = null, date = null, createTask){ 
     const token = localStorage.getItem('token')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/projects', {
@@ -29,7 +30,18 @@ export function createProject(newObj){
             body: JSON.stringify(newObj)
         })
         .then(r => r.json())
-        .then(newProject => dispatch({type: CREATE_PROJECT_FOR_DATE, payload: newProject}))
+        .then(newProject => {
+            dispatch({type: CREATE_PROJECT_FOR_DATE, payload: newProject})
+            for (let task of tasksArray){
+                const taskObj = {
+                    archived: false,
+                    date: date,
+                    content: task,
+                    project_id: newProject.id
+                }
+                createTask(taskObj)
+            }
+        })
     }
 }
 

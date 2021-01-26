@@ -64,12 +64,14 @@ class Calendar extends Component {
     dateClickHandler = (info) => {
         const projects = [...this.props.projects].filter(project => project.date === info.dateStr)
         //get tasks for above projects
-        let projectOneId;
-        let projectTwoId;
         if (projects.length > 0){
-            projectOneId = projects[0].id
-            projectTwoId = projects[1].id
-            this.props.getProjectsTasks(projectOneId, projectTwoId)
+            for (let pro of projects){
+                this.props.getProjectsTasks(pro.id)
+            }
+            // projectOneId = projects[0].id
+            // projectTwoId = projects[1].id
+            // this.props.getProjectsTasks(projectOneId)
+            // this.props.getProjectsTasks(projectTwoId)
         }
             
             if (projects.length <=0 && info.date < new Date()){
@@ -125,7 +127,7 @@ const mdp = (dispatch) => {
     return {
         getProjects: (userId) => dispatch(getProjects(userId)),
         createProject: (object) => dispatch(createProject(object)),
-        getProjectsTasks: (projectOneId, projectTwoId) => dispatch(getProjectsTasks(projectOneId, projectTwoId))
+        getProjectsTasks: (proId) => dispatch(getProjectsTasks(proId))
     }
 }
 

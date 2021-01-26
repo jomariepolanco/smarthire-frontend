@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getProjects } from '../../Redux/projects/actions'
 import Calendar from '../Components/Calendar'
-import styled from 'styled-components'
 
 class HomeContainer extends Component {
 

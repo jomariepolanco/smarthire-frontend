@@ -1,6 +1,6 @@
 import { CREATE_TASK, GET_PROJECT_TASKS, UPDATE_TASK } from "./actionTypes"
 
-export function getProjectsTasks(projectOneId, projectTwoId){
+export function getProjectsTasks(proId){
     const token = localStorage.getItem('token')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/tasks', {
@@ -11,7 +11,7 @@ export function getProjectsTasks(projectOneId, projectTwoId){
         })
         .then(r => r.json())
         .then(tasksData => {
-            const tasks = tasksData.filter(task => task.projectId === projectOneId || task.projectId === projectTwoId)
+            const tasks = tasksData.filter(task => task.projectId === proId)
             dispatch({type: GET_PROJECT_TASKS, payload: tasks})
         })
     }
@@ -46,6 +46,8 @@ export function createTask(taskObj){
             body: JSON.stringify(taskObj)
         })
         .then(r => r.json())
-        .then(newTask => dispatch({type: CREATE_TASK, payload: newTask}))
+        .then(newTask => {
+            dispatch({type: CREATE_TASK, payload: newTask})
+        })
     }
 }

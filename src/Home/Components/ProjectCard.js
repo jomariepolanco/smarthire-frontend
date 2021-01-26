@@ -18,6 +18,7 @@ export default class ProjectCard extends Component {
     }
     
     render() {
+        console.log(this.props.tasks)
         return (
             <Card.Description>
                 <Card.Header as='h4'>

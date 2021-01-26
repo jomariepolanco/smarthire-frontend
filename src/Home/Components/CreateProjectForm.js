@@ -45,23 +45,11 @@ class CreateProjectForm extends Component {
             archived: false
         }
 
-        this.props.createProject(newObj)
-        this.submitTasks()
+        this.props.createProject(newObj, this.state.tasks, this.state.date, this.props.createTask)
+        this.setState({open: false})
     }
 
-    submitTasks = () => {
-        const project = [...this.props.projects][this.props.projects.length - 1]
-
-        for (let task of [...this.state.tasks]){
-            const taskObj = {
-                archived: false,
-                date: this.state.date,
-                content: task,
-                project_id: project.id
-            }
-            this.props.createTask(taskObj)
-        }
-    }
+   
 
     render() {
         console.log(this.state.taskNumber)
@@ -98,7 +86,7 @@ const msp = (state) => {
 
 const mdp = (dispatch) => {
     return {
-        createProject: (projectObj) => dispatch(createProject(projectObj)),
+        createProject: (projectObj, tasksArray, date, createTaskFn) => dispatch(createProject(projectObj, tasksArray, date, createTaskFn)),
         createTask: (taskObj) => dispatch(createTask(taskObj))
     }
 }
