@@ -25,6 +25,7 @@ class NotesCard extends Component {
     submitHandler = (e) => {
         e.preventDefault()
         this.props.updateCandidate(this.props.candidate.id, this.state)
+        this.focusOutHandler()
     }
 
     render() {
@@ -35,14 +36,14 @@ class NotesCard extends Component {
 
                 {this.state.focus ? 
                 
-                <Form onFocus={this.focusHandler} onBlur={this.focusOutHandler} widths="equal" onSubmit={this.submitHandler}>
-                    <Form.TextArea control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
+                <Form widths="equal" onSubmit={this.submitHandler}>
+                    <Form.TextArea rows="40" cols="40" onFocus={this.focusHandler} control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
                     <Button color="blue">Update Note</Button>
                 </Form>
             
                 :
             
-                <p onClick={this.focusHandler}>{this.props.notes}</p>
+                <div style={{whiteSpace: 'pre-line'}} onClick={this.focusHandler}>{this.props.notes}</div>
             
                 }
                 
