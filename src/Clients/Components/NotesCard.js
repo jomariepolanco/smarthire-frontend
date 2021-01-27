@@ -37,7 +37,7 @@ class NotesCard extends Component {
                 {this.state.focus ?  
                     <Form widths="equal" onSubmit={this.submitHandler}>
                         <Form.TextArea rows="40" cols="40" onFocus={this.focusHandler} control={TextArea} type="textarea" value={this.state.notes} name="notes" onChange={this.changeHandler} />
-                        <Button color="blue">Update Notes</Button>
+                        <Button color="green">Update Notes</Button>
                     </Form>
             
                 :

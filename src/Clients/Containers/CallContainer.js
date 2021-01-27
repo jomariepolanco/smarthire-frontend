@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List } from 'semantic-ui-react'
+import { Header, List, Table } from 'semantic-ui-react'
 import CallCard from '../Components/CallCard'
 import CreateCallForm from '../Components/CreateCallForm'
 
@@ -10,11 +10,8 @@ export default class CallContainer extends Component {
         return calls.map(call => {
             return(
                 <>
-                <List.Item>
-                    <List.Content>
-                        <CallCard key={call.id} call={call} />
-                    </List.Content>
-                </List.Item>
+                    <CallCard key={call.id} call={call} />
+                    
                 </>
             )
         })
@@ -22,10 +19,19 @@ export default class CallContainer extends Component {
     render() {
         return (
             <div>
-                <h3>Calls</h3>
-                <List>
-                    {this.renderCallCards()}
-                </List>
+                <Header as='h3'>Calls</Header>
+                <Table basic='very' celled>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Date</Table.HeaderCell>
+                            <Table.HeaderCell>Caller</Table.HeaderCell>
+                            <Table.HeaderCell>Call Type</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {this.renderCallCards()}
+                    </Table.Body>
+                </Table>
                 <CreateCallForm company={this.props.company} />
             </div>
         )

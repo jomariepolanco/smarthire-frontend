@@ -4,7 +4,7 @@ import Form from '../../sharedComponents/Form'
 import NotesCard from './NotesCard'
 import JobsContainer from '../../Jobs/Containers/JobsContainer'
 import { connect } from 'react-redux'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Header, Segment } from 'semantic-ui-react'
 
 
 class CompanyCard extends Component {
@@ -31,10 +31,11 @@ class CompanyCard extends Component {
         return (
             <div>
                 <h1>{this.props.company.name}</h1>
-                <Grid columns={2} divided>
+                <Grid columns={2}>
                     <Grid.Row stretched>
                         <Grid.Column>
-                            <Segment>
+                            <Segment raised>
+                                <Header as='h3'>Company Information</Header>
                                 <Form value={this.state.name} name="name" changeHandler={this.changeHandler} placeholder="Name" submitHandler={this.submitHandler}/>
 
                                 <Form value={this.state.industry} name="industry" changeHandler={this.changeHandler} placeholder="Industry" submitHandler={this.submitHandler}/>
@@ -47,15 +48,15 @@ class CompanyCard extends Component {
 
                                 <Form value={this.state.poc_number} name="poc_number" changeHandler={this.changeHandler} placeholder="Point of Contact Phone Number" submitHandler={this.submitHandler}/>
                             </Segment>
-                            <Segment>
+                            <Segment raised>
                                 <CallContainer company={this.props.company} calls={this.props.company.calls}/>
                             </Segment>
                         </Grid.Column>
                         <Grid.Column>
-                            <Segment>
+                            <Segment raised>
                                 <NotesCard company={this.props.company} notes={this.props.company.notes} />
                             </Segment>
-                            <Segment>
+                            <Segment raised>
                                 <JobsContainer submitHandler={this.props.createJobSubmitHandler} company={this.props.company} jobs={this.props.company.jobs} />
                             </Segment>
                         </Grid.Column>

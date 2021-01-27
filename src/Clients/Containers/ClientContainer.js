@@ -8,7 +8,7 @@ import CompanyCard from '../Components/CompanyCard';
 import CreateClientForm from '../Components/CreateClientForm';
 import JobCard from '../../Jobs/Components/JobCard';
 import { getJobs } from '../../Redux/jobs/actions';
-import { Segment } from 'semantic-ui-react';
+import { Header, Segment } from 'semantic-ui-react';
 
 
 class ClientContainer extends Component {
@@ -71,14 +71,15 @@ class ClientContainer extends Component {
                 <Route path='/clients' render={(routerProps) => {
                     return (
                         <div>
+                            <Segment basic floated='right'>
+                                <CreateClientForm history={routerProps.history} />
+                            </Segment>
+                            <Header as='h1' floated='left'>Clients</Header>
                             <Segment basic>
                                 <SearchForm changeHandler={this.searchFormOnChange} searchValue={this.state.searchedCompanies} label="Search By Company Name or Industry"/>
                             </Segment>
                             <Segment basic>
                                 <ClientList clients={this.searchFormList()} />
-                            </Segment>
-                            <Segment basic>
-                                <CreateClientForm history={routerProps.history} />
                             </Segment>
                         </div>
 
