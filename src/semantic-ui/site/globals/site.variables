@@ -3,7 +3,7 @@
 *******************************/
 
 @primaryColor: #002f4e;
-@pageBackground: #fcfcfc;
+@pageBackground: linear-gradient(to right top, #fffff, #fcfcfc);
 @pageFont: 'Fira Sans Condensed', sans-serif;
 @headerFont: 'Fira Sans Condensed', sans-serif;
 @googleFontFamily: 'Fira Sans Condensed', sans-serif;

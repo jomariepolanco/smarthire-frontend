@@ -16,6 +16,9 @@ export default class Navbar extends Component {
         const {activeItem} = this.state
         return (
             <Menu secondary>
+                    <Menu.Item name='icon'>
+                    <img src="https://i.ibb.co/rmxpwsd/Hiresmart.png" alt="Hiresmart" />
+                    </Menu.Item>
                     <Menu.Item name='home' active={activeItem === 'home'}
                     onClick={this.handleItemClick}
                     as={NavLink} to='/home'>
