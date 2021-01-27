@@ -14,9 +14,10 @@ export default class FormInput extends Component {
     render() {
         return (
             <Form onSubmit={this.submitHandler}>
-                <Form.Group inline widths="equal">
-                    <Form.Field width="3" control={Input} label={this.props.placeholder} type="text" value={this.props.value} name={this.props.name} onChange={this.props.changeHandler} placeholder={this.props.placeholder}/>
-                    <Button compact size='medium' color="green" animated='fade'>
+                <label style={{color: '#1b9aaa'}}>{this.props.placeholder}</label>
+                <Form.Group inline widths='equal'>
+                    <Form.Field width='1' control={Input}type="text" value={this.props.value} name={this.props.name} onChange={this.props.changeHandler} placeholder={this.props.placeholder}/>
+                    <Button compact size='large' color="green" animated='fade'>
                         <Icon name="edit outline" />
                     </Button>
                 </Form.Group>

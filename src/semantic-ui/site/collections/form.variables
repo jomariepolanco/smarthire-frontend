@@ -4,3 +4,4 @@
 
 @inputColor: @grey;
 @labelColor: @blue;
+@labelWidth: 240px;
