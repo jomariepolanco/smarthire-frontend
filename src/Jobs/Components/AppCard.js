@@ -19,6 +19,7 @@ class AppCard extends Component {
             <div>
                 <h3 style={{color: this.renderColor()}}>{application.candidate}
                 </h3>
+                <br />
             </div>
         )
     }
