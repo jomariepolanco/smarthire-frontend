@@ -17,7 +17,7 @@ export default class Navbar extends Component {
         return (
             <Menu secondary>
                     <Menu.Item name='icon'>
-                    <img src="https://i.ibb.co/rmxpwsd/Hiresmart.png" alt="Hiresmart" />
+                    <img src="https://i.ibb.co/nbsDTwz/Untitled-design-8.png" alt="Untitled-design-8" border="0" /><h4>HireSmart</h4>
                     </Menu.Item>
                     <Menu.Item name='home' active={activeItem === 'home'}
                     onClick={this.handleItemClick}

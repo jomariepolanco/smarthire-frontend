@@ -74,6 +74,7 @@ class ClientContainer extends Component {
                             <Segment basic floated='right'>
                                 <CreateClientForm history={routerProps.history} />
                             </Segment>
+                            <br />
                             <Header as='h1' floated='left'>Clients</Header>
                             <Segment basic>
                                 <SearchForm changeHandler={this.searchFormOnChange} searchValue={this.state.searchedCompanies} label="Search By Company Name or Industry"/>

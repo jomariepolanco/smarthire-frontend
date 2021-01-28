@@ -11,7 +11,7 @@ import { getProjectsTasks } from '../../Redux/tasks/actions'
 class Calendar extends Component {
 
     state = {
-        candidateColor: '#ff5964',
+        candidateColor: '#62c370',
         clientColor: '#1b9aaa'
     }
 
@@ -60,13 +60,11 @@ class Calendar extends Component {
         })
     }
 
-    dateClickHandler = (info) => {
+    dateClickHandler = async (info) => {
         const projects = [...this.props.projects].filter(project => project.date === info.dateStr)
         //get tasks for above projects
-        if (projects.length > 0){
-            for (let pro of projects){
-                this.props.getProjectsTasks(pro.id)
-            }
+        for (let pro of projects){
+            await this.props.getProjectsTasks(pro.id)
         }
 
             
@@ -80,6 +78,7 @@ class Calendar extends Component {
     }
 
     render() {
+        console.log(this.props.tasks)
         return (
             <>
             <Switch>
@@ -88,7 +87,7 @@ class Calendar extends Component {
                     
                     let projects = [...this.props.projects].filter(project => project.date === projectDate)
 
-                   return <ProjectsContainer  projects={projects} />
+                   return <ProjectsContainer  projects={projects} tasks={this.props.tasks} />
                 }
                 } />
                 <Route path='/home' render={() => {
@@ -112,7 +111,8 @@ const msp = (state) => {
         projects: state.projects,
         candidates: state.candidates,
         companies: state.companies,
-        user: state.user
+        user: state.user,
+        tasks: state.tasks
     }
 }
 
